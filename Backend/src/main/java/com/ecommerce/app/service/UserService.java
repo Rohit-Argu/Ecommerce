@@ -1,0 +1,30 @@
+package com.ecommerce.app.service;
+
+import com.ecommerce.app.entity.Address;
+import com.ecommerce.app.entity.User;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
+
+public interface UserService {
+    UserDetailsService userDetailsService();
+
+    ResponseEntity<List<User>> getUsers();
+
+    ResponseEntity<User> getUser();
+
+    ResponseEntity<User> updateUser(User user);
+
+    ResponseEntity<String> deleteUser(int id);
+
+    ResponseEntity<Address> addAddress(Address address);
+
+    ResponseEntity<List<Address>> getAddresses();
+
+    ResponseEntity<Address> getAddress(int id);
+
+    ResponseEntity<Address> updateAddress(int id, Address address);
+
+    ResponseEntity<String> deleteAddress(int id);
+}

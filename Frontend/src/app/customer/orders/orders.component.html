@@ -1,0 +1,75 @@
+<section class="h-100" style="background-color: rgb(241, 233, 222);">
+    <nav class="row container1 navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="col-md-4">
+
+        </div>
+        
+        <div class="col-md-4 nav-item1 d-flex justify-content-center" routerLink="/products">
+            <a class="navbar-brand nav-item2" href="#">
+                <i class="fa fa-shopping-bag fa-lg" style="color: white;"></i>
+                <span class="text-uppercase fw-lighter ms-2" style="color: white;">E-Commerce App</span>
+            </a>
+
+        </div>
+        <div class="col-md-4 nav-item1 d-flex">
+            <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nav1 "id="navbarSupportedContent ">
+                
+                <ul class="navbar-nav mr-auto d-flex" >
+                    <li class="nav-item">
+                        <button type="button" class="btn position-relative" routerLink="/user">
+                            <i class="fa fa-user fa-lg" style="color: white;"></i>
+                            <span class="position-aboslute top-0 translate-middle badge bg-primary">5</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn right-0 position-absolute" routerLink="/cart">
+                            <i class="fa fa-shopping-cart fa-lg " style="color: white;"></i>
+                            <span class="position-aboslute top-0 translate-middle badge bg-primary">2</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    
+    
+    <div class="container py-5 h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngFor="let item of orders;let i=index">
+                    <div class="border border-secondary shadow p-4 mb-4 bg-white" style="border-radius: 2vw;cursor: pointer;" (click)="changeShow(i)">
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                
+                            <div class="d-flex col-xl-12" style="justify-content: space-evenly;">
+
+                                <h6 class="text-muted"><strong>Order number : </strong>{{i}}</h6>
+                                <h6 class="text-muted"><strong>Number Of Items: </strong>{{item.numberOfItems}}</h6>
+                                <h6 class="text-black mb-0"><strong>Total Price: </strong>{{item.totalPrice}}</h6>
+                                <h6 class="text-black mb-0 d-flex"><strong>Delivery Status: </strong>
+                                    <p id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm">
+                                        {{item.deliveryStatus}}</p>
+                                </h6>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                
+                
+                
+                            </div>
+                
+                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                <a href="" class="text-muted"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <app-order-details *ngIf="item.show"
+                    [index]="i"></app-order-details>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
