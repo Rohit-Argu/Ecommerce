@@ -4,8 +4,8 @@
 
         </div>
         
-        <div class="col-md-4 nav-item1 d-flex justify-content-center" routerLink="/products">
-            <a class="navbar-brand nav-item2" href="#">
+        <div class="col-md-4 nav-item1 d-flex justify-content-center" style="cursor: pointer;" routerLink="/products">
+            <a class="navbar-brand nav-item2">
                 <i class="fa fa-shopping-bag fa-lg" style="color: white;"></i>
                 <span class="text-uppercase fw-lighter ms-2" style="color: white;">E-Commerce App</span>
             </a>
@@ -61,9 +61,7 @@
                 
                             </div>
                 
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                <a href="" class="text-muted"><i class="fa fa-times"></i></a>
-                            </div>
+                            
                         </div>
                     </div>
                     <app-order-details *ngIf="item.show"

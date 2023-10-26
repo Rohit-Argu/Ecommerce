@@ -13,7 +13,7 @@ import { OrderDetailsComponent } from './customer/orders/order-details/order-det
 import { ProductComponent } from './shared/products/product/product.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/products', pathMatch:'full'},
+  {path: '', redirectTo: 'login', pathMatch:'full'},
   {path: 'products', component:ProductsComponent,canActivate: [AuthGuard]},
   {path: 'products/:id', component: ProductComponent},
   {path: 'login', component: LoginComponent},
@@ -24,7 +24,8 @@ const routes: Routes = [
   {path: 'orders', component: OrdersComponent,children:[{
     path: ':id', component: OrderDetailsComponent
   }]},
-  {path: 'seller',component: SellerComponent}
+  {path: 'seller',component: SellerComponent},
+  {path: 'viewUsers', component: AdminComponent}
 ];
 
 @NgModule({

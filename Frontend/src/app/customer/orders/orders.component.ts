@@ -6,8 +6,7 @@ import { OrdersService } from './orders.service';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css'],
-  providers: [OrdersService]
+  styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit{
 
@@ -19,6 +18,11 @@ export class OrdersComponent implements OnInit{
 
   ngOnInit(): void {
     this.orders=this.ordersService.getOrders();
+    this.ordersService.ordersChanged.subscribe(
+      (order:OrdersModel[])=>{
+        this.orders=order;
+      }
+    )
   }
 
   changeShow(index:number){

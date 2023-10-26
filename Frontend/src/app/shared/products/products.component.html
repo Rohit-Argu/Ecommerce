@@ -33,13 +33,12 @@
                     <li class="nav-item">
                         <button type="button" class="btn position-relative" routerLink="/user">
                             <i class="fa fa-user fa-lg" style="color: white;"></i>
-                            <span class="position-aboslute top-0 translate-middle badge bg-primary">5</span>
                         </button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn position-relative" routerLink="/cart" *ngIf="getUser()==='customer'">
                             <i class="fa fa-shopping-cart fa-lg" style="color: white;"></i>
-                            <span class="position-aboslute top-0 translate-middle badge bg-primary">2</span>
+                            <span class="position-aboslute top-0 translate-middle badge bg-primary" >{{getCartCount()}}</span>
                         </button>
                     </li>
                 </ul>
