@@ -45,11 +45,11 @@ public class Product {
     private User seller;
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
+    @JsonBackReference
     private List<OrderDetails> orderDetails;
 
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @JsonIgnore
     private List<CartDetails> cartDetails;
 
 }

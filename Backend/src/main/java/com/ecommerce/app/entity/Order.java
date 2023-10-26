@@ -1,5 +1,7 @@
 package com.ecommerce.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +26,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
+    @JsonIgnore
     private Address address;
 
     @Column(name = "ordered_at")
@@ -36,9 +40,11 @@ public class Order {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderDetails> orderDetails = new ArrayList<>();
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Payment payment;
 }

@@ -64,6 +64,7 @@ public class User implements UserDetails {
     private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Order> order = new ArrayList<>();
 
     @Override

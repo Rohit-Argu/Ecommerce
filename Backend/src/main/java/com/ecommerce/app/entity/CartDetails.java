@@ -1,6 +1,7 @@
 package com.ecommerce.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
@@ -30,7 +31,7 @@ public class CartDetails {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonManagedReference
+    @JsonIgnore
     private Product product;
 
 }

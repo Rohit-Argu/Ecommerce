@@ -1,12 +1,11 @@
 package com.ecommerce.app.controller;
 
 import com.ecommerce.app.entity.Order;
+import com.ecommerce.app.entity.Payment;
+import com.ecommerce.app.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,17 +14,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    @PostMapping("/placeOrder")
-    public ResponseEntity<Order> placeOrder() {
-        return null;
+    private final OrderService orderService;
+
+    @PostMapping("/placeOrder/{addressId}")
+    public ResponseEntity<Order> placeOrder(@PathVariable int addressId, @RequestBody Payment payment) {
+        return this.orderService.placeOrder(addressId,payment);
     }
 
     @GetMapping("/allOrders")
-    public ResponseEntity<List<Order>> allProducts() {
-        return null;
+    public ResponseEntity<List<Order>> allOrders() {
+        return this.orderService.getAllOrders();
     }
     @GetMapping("/orderHistory")
     public ResponseEntity<List<Order>> orderHistory() {
-        return null;
+        return this.orderService.orderHistory();
     }
 }
