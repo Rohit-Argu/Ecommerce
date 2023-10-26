@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit{
 
-  acnt_type="customer";
+  acnt_type="admin";
   option1="cart";
   option2="orders";
 

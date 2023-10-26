@@ -1,47 +1,51 @@
-
 <div class="body1">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <div class="d-flex justify-content-end social_icon logos">
-                        <span><i class="fab fa-facebook-square">
-                            <img src="../../../assets/square-facebook.svg" alt="">
-                        </i></span>
-                        <span><i class="fab fa-google-plus-square">
-                            <img src="../../../assets/google-plus (3) (1).svg" alt="">
-                        </i></span>
-                        <span><i class="fab fa-twitter-square">
-                            <img src="../../../assets/twitter.svg" alt="">
-                        </i></span>
+                    <div class="d-flex social_icon logos" style="width: 60%; height: 20%; right: 0; justify-content: space-evenly;">
+                        <span style="height: 100%"><i class="fa fa-facebook-square">
+                            </i></span>
+                        <span style="height: 100%"><i class="fa fa-google-plus-square">
+                            </i></span>
+                        <span style="height: 100%"><i class="fa fa-twitter-square">
+                            </i></span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="input-group form-group user-input">
-                            
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fas fa-user"><img src="../../../assets/user-solid.svg" alt="" style="height: 100%;width: 100%;"></i></span>
+                        
+                            <div class="input-group-prepend form-group d-flex w-100">
+                                <span class="input-group-text ">
+                                    <i class="fa fa-user fa-lg" style="width: 100%; height: auto;"></i></span>
+                                    <input type="text" class="form-control w-100" placeholder="Username" formControlName="username">
+                                   
                             </div>
-                            <input type="text" class="form-control" placeholder="username">
-
+                            <div *ngIf="!this.loginForm.get('username')?.valid && loginForm.get('username')?.touched"
+                            class="help-block" style="color: rgb(255, 2, 2) !important;">Please enter a valid username
+                        </div>
+                                
+                                
+                                
+                        
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"><img src="../../../assets/key-solid.svg" alt="" style="height: 100%;width: 100%;"></i></span>
+                                <span class="input-group-text"><i class="fa fa-key fa-lg" style="width: 100%; height: auto;"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password">
+                            <input type="password" class="form-control" [placeholder]="[(!this.loginForm.get('password')?.valid && loginForm.get('password')?.touched)?'Please enter a valid Password':'Password']" formControlName="password">
                         </div>
 
                         <hr>
-                        <div class="flex">
+                        <div class="flex form-group">
                             <div class="row align-items-center remember">
                                 <input type="checkbox">Remember Me
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn" [routerLink]="['/products']" style="background-color: #fac901;">Login</button>
+                                <button type="submit" class="btn" 
+                                    style="background-color: #fac901;">Login</button>
                             </div>
                         </div>
                     </form>

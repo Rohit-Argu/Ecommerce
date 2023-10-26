@@ -5,7 +5,7 @@ import { ProductModel } from "src/app/shared/model/product.model";
 
 @Injectable({providedIn:'root'})
 export class CartService{
-    itemChanges=new EventEmitter<CartProductModel[]>();
+    itemChanges=new Subject<CartProductModel[]>();
     items: CartProductModel[]=[];
       getItems(){
         return this.items.slice();
@@ -19,10 +19,21 @@ export class CartService{
             price: p.price,
             quantity: q>0?q:1
         });
-        this.itemChanges.emit(this.items.slice());
+        this.itemChanges.next(this.items.slice());
       }
       removeFromCart(i:number){
         this.items.splice(i,1);
-        this.itemChanges.emit(this.items.slice());
+        this.itemChanges.next(this.items.slice());
+      }
+      emptyCart(){
+        this.items=[];
+        this.itemChanges.next(this.items.slice());
+      }
+      getTotalQuantity(){
+        let sum=0;
+        for(let item of this.items){
+          sum=sum+item.quantity;
+        }
+        return sum;
       }
 }
