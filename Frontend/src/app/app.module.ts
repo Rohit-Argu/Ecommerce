@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserComponent } from './customer/user.component';
 import { ProductComponent } from './shared/products/product/product.component';
 import { OrderDetailsComponent } from './customer/orders/order-details/order-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { OrderDetailsComponent } from './customer/orders/order-details/order-det
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
