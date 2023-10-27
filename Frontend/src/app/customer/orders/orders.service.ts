@@ -10,8 +10,8 @@ export class OrdersService{
 
   constructor(private cartService:CartService){}
 
-  ordersChanged=new EventEmitter<OrdersModel[]>()
-  orderDetailsChanged=new EventEmitter<OrderDetailsModel[]>()
+  ordersChanged=new Subject<OrdersModel[]>()
+  orderDetailsChanged=new Subject<OrderDetailsModel[]>()
     orders:OrdersModel[]=[];
       orderDetails: OrderDetailsModel[]=[];
       getOrders(){
@@ -22,7 +22,7 @@ export class OrdersService{
       }
   addOrder(order:OrdersModel,products: CartProductModel[]){
     this.orders.push(order);
-    this.ordersChanged.emit(this.orders.slice());
+    this.ordersChanged.next(this.orders.slice());
     let orderDetail:OrderDetailsModel={
       products:[],
       totalPrice: order.totalPrice,
@@ -38,7 +38,7 @@ export class OrdersService{
       })
     }
     this.orderDetails.push(orderDetail);
-    this.orderDetailsChanged.emit(this.orderDetails.slice());
+    this.orderDetailsChanged.next(this.orderDetails.slice());
     
     this.cartService.emptyCart();
   }

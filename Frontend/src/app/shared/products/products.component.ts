@@ -37,8 +37,10 @@ export class ProductsComponent implements OnInit{
   details(i:number){
     this.router.navigate(['/products',i]);
   }
-  getCartCount(){
-    return this.cartService.getTotalQuantity();
+  onSearchSubmit(s:any){
+    this.productService.search(s.value);
+    s.value="";
+    s.focus();
   }
 
 }

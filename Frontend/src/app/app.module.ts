@@ -17,6 +17,7 @@ import { UserComponent } from './customer/user.component';
 import { ProductComponent } from './shared/products/product/product.component';
 import { OrderDetailsComponent } from './customer/orders/order-details/order-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     UserComponent,
     ProductComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

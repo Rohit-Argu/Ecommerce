@@ -106,4 +106,7 @@ export class ProductService{
     getProducts(i:number){
         return this.product[i];
     }
+    search(text:string){
+        console.log(text);
+    }
 }
