@@ -45,7 +45,7 @@ public class Product {
     private User seller;
 
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+    @JsonIgnore
     private List<OrderDetails> orderDetails;
 
     @OneToMany(mappedBy = "product")
