@@ -15,6 +15,14 @@ export class AdminComponent implements OnInit{
   ngOnInit(): void {
     this.users=this.userService.getUsers();
     console.log(this.users);
+    this.userService.usersChange.subscribe(
+      (users:UserModel[])=>{
+        this.users=users; 
+      }
+    )
+  }
+  onDelete(i:number){
+    this.userService.deleteUser(i);
   }
 
 }

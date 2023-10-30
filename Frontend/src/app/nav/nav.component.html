@@ -1,0 +1,39 @@
+<nav class="container1 navbar navbar-expand-lg navbar-light bg-dark">
+
+    <div style="width: 33%">
+
+        
+        <div class="" id="navbarSupportedContent1">
+            <a class="nav-text" style="color: white; text-decoration: none;">Hello, {{getFirstName()}}</a>
+        </div>
+    </div>
+    <div class="nav-item1 d-flex"  style="justify-content: center;">
+        <a class="navbar-brand" [routerLink]="['/products']">
+            <i class="fa fa-shopping-bag fa-lg" style="color: white;"></i>
+            <span class="text-uppercase fw-lighter ms-2" style="color: white;">E-Commerce App</span>
+        </a>
+
+    </div>
+    <div class="nav-item1 d-flex">
+        <button class="navbar-toggler" type="button" style="border-color: white; right: 2vw; position: absolute; top: 1.5vh;" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <span class="navbar-toggler-icon navbar-light" style="color: white;" ></span> -->
+            <i class="fa fa-bars" style="color: white;" ></i>
+        </button>
+        <div class="collapse navbar-collapse nav1 nav-item2" id="navbarSupportedContent">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button type="button" class="btn position-relative" routerLink="/user">
+                        <i class="fa fa-user fa-lg" style="color: white;"></i>
+                    </button>
+                    <button type="button" class="btn position-relative" routerLink="/cart">
+                        <i class="fa fa-shopping-cart fa-lg" style="color: white;"></i>
+                        <span *ngIf="getCartCount()" class="position-aboslute top-0 translate-middle badge bg-primary">{{getCartCount()}}</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
