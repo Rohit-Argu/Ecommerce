@@ -36,4 +36,7 @@ export class CartService{
         }
         return sum;
       }
+      itemChanged(){
+        this.itemChanges.next(this.items.slice())
+      }
 }
