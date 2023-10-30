@@ -40,6 +40,7 @@ export class CartComponent implements OnInit{
     }
     else
     this.items[i].quantity--;
+  this.cartService.itemChanged();
   }
   onQuantityIncrease(i:number){
     if(this.items[i].quantity===5){
@@ -47,6 +48,7 @@ export class CartComponent implements OnInit{
     }
     else
     this.items[i].quantity++;
+    this.cartService.itemChanged();
   }
 
   getPrice(){
@@ -75,6 +77,9 @@ export class CartComponent implements OnInit{
     };
     this.ordersService.addOrder(order,this.items);
     this.router.navigate(['orders'])
+  }
+  totalQuantity(){
+    return this.cartService.getTotalQuantity();
   }
 
 }

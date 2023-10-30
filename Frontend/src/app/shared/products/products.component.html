@@ -1,51 +1,35 @@
-<body>
-    <nav class="container1 navbar navbar-expand-lg navbar-light bg-dark" >
+
+<div class="d-flex" style="background-color: rgba(16, 14, 27, 0.89); color: white;">
+    
+    <div class="d-flex flex-nowrap overflow-hidden text-center" style="width: 80%;">
+      <div class="container text-muted" style="cursor:default ;padding: 11px 0px 7px 0px; background-color: #ffffffa4;border-top-right-radius: 20px;border-bottom-right-radius: 20px;"><h6>Categories:</h6></div>
+      <div class="col-1">Shoes</div>
+      <div class="col-1">Bags</div>
+      <div class="col-1">TV</div>
+      <div class="col-1">Mobiles</div>
+      <div class="col-1">Shirts</div>
+      <div class="col-1">Jeans</div>
+      <div class="col-1">Shoes</div>
+      <div class="col-1">Bags</div>
+      <div class="col-1">TV</div>
+      <div class="col-1">Mobiles</div>
+      
+      
+    </div>
+    <div class="d-flex" style="width: 300px;height: 5vh;margin-top: 0.5vh; background-color: white; border-top-left-radius: 20px; border-bottom-left-radius: 20px;" >
+        <input class=" mr-sm-2" placeholder="Search" style="outline: none; width: 80%; border-color: white;padding: 10px; border-width: 0px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; padding-left: 1vw; background-color: #f3d63e1c;" aria-label="Search" #searchText>
+        <button class="bg-light btn-remove-styles  " type="submit" (click)="onSearchSubmit(searchText)" style="margin-left:0px; width: 20%;background-color: white;"><i class="fa fa-search" style="color: rgba(16, 14, 27, 0.89);"></i></button>
+    </div>
+  </div>
+<body>  
+    <header class="row d-flex">
         
-        <div style="width: 33%;">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse nav-item1" id="navbarSupportedContent1">
-                <a class="nav-text" href="#" style="color: white;">Help</a>
-                <a class="nav-text" href="#" style="color: white;">Contact</a>
-        </div>
-        </div>
-        <div class="nav-item1 d-flex">
-            <a class="navbar-brand nav-item2" [routerLink]="['/products']">
-                <i class="fa fa-shopping-bag fa-lg" style="color: white;"></i>
-                <span class="text-uppercase fw-lighter ms-2" style="color: white;">E-Commerce App</span>
-            </a>
-
-        </div>
-        <div class="nav-item1 d-flex">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse nav1" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0 d-flex">
-                    <input class="form-control mr-sm-2" style="width: 50%" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit" style="color: white;">Search</button>
-                </form>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <button type="button" class="btn position-relative" routerLink="/user">
-                            <i class="fa fa-user fa-lg" style="color: white;"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn position-relative" routerLink="/cart" *ngIf="getUser()==='customer'">
-                            <i class="fa fa-shopping-cart fa-lg" style="color: white;"></i>
-                            <span class="position-aboslute top-0 translate-middle badge bg-primary" >{{getCartCount()}}</span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
+        
+        <!-- <form class="form-inline my-2 my-lg-0 d-flex bg-dark col-sm-4" style="justify-content: center;">
+            <input class="form-control mr-sm-2" style="width: 50%" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="submit" style="color: white;">Search</button>
+        </form> -->
+    </header>
     <div id="carouselExampleIndicators" class="carousel slide bg-dark" data-ride="carousel">
         
         <div class="carousel-inner">
