@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService{
             order.getOrderDetails().add(orderDetail);
         }
         payment.setOrder(order);
+        payment.setAmount(cart.getAmount());
         order.setPayment(payment);
         this.cartService.emptyCart();
         orderRepository.save(order);

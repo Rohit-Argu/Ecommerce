@@ -28,7 +28,7 @@ public class Cart {
     private BigDecimal amount;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonManagedReference
     private List<CartDetails> cartDetails = new ArrayList<>();
 
     @OneToOne
