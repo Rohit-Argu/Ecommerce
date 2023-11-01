@@ -1,10 +1,16 @@
 package com.ecommerce.app.service;
 
+import com.ecommerce.app.dao.UsersResp;
 import com.ecommerce.app.entity.Address;
 import com.ecommerce.app.entity.User;
 import com.ecommerce.app.repository.AddressRepository;
 import com.ecommerce.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,9 +39,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> li = new ArrayList<>(userRepository.findAll());
-        return ResponseEntity.ok(li);
+    public ResponseEntity<UsersResp> getUsers(int page, int size, String sortField, String filterField, String filterValue) {
+
+        Sort.Direction sortDir = Sort.Direction.ASC;
+
+        Pageable p = PageRequest.of(page, size, Sort.by(sortDir, sortField));
+        Page<User> pagePost = userRepository.findAll(filterByField(filterField, filterValue), p);
+        List<User> allPosts = pagePost.getContent();
+
+        UsersResp usersResp = new UsersResp();
+
+        usersResp.setContent(allPosts);
+        usersResp.setPageNumber(pagePost.getNumber());
+        usersResp.setPageSize(pagePost.getSize());
+        usersResp.setTotalElements(pagePost.getTotalElements());
+        usersResp.setTotalPages(pagePost.getTotalPages());
+        usersResp.setLastPage(pagePost.isLast());
+
+        return ResponseEntity.ok(usersResp);
+    }
+
+    private Specification<User> filterByField(String filterField, String filterValue) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(filterField), "%" + filterValue + "%");
     }
 
 
