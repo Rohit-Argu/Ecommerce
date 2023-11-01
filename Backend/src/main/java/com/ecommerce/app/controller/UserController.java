@@ -1,5 +1,6 @@
 package com.ecommerce.app.controller;
 
+import com.ecommerce.app.dao.UsersResp;
 import com.ecommerce.app.entity.Address;
 import com.ecommerce.app.entity.User;
 import com.ecommerce.app.service.UserService;
@@ -17,8 +18,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/admin/getUsers")
-    public ResponseEntity<List<User>> getUsers() {
-        return this.userService.getUsers();
+    public ResponseEntity<UsersResp> getUsers(
+            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam(defaultValue = "2", required = false) int size,
+            @RequestParam(defaultValue = "id", required = false) String sortField,
+            @RequestParam(defaultValue = "", required = false) String filterField,
+            @RequestParam(defaultValue = "", required = false) String filterValue
+    ) {
+        return this.userService.getUsers(page, size, sortField, filterField, filterValue);
     }
 
     @GetMapping("/getUser")
