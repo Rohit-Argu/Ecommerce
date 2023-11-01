@@ -30,16 +30,16 @@ public class ProductController {
         return this.productService.getProduct(id);
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/seller/addProduct")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         return this.productService.addProduct(product);
     }
-    @PutMapping("/updateProduct/{id}")
+    @PutMapping("/seller/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product product) {
         return this.productService.updateProduct(id, product);
     }
 
-    @DeleteMapping("/deleteProduct/{id}")
+    @DeleteMapping("/seller/deleteProduct/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable int id) {
         return this.productService.deleteProduct(id);
     }
