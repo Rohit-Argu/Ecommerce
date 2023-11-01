@@ -4,14 +4,14 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <div class="d-flex social_icon logos" style="width: 60%; height: 20%; right: 0; justify-content: space-evenly;">
+                    <!-- <div class="d-flex social_icon logos" style="width: 60%; height: 20%; right: 0; justify-content: space-evenly;">
                         <span style="height: 100%"><i class="fa fa-facebook-square">
                             </i></span>
                         <span style="height: 100%"><i class="fa fa-google-plus-square">
                             </i></span>
                         <span style="height: 100%"><i class="fa fa-twitter-square">
                             </i></span>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-body">
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -19,12 +19,12 @@
                         
                             <div class="input-group-prepend form-group d-flex w-100">
                                 <span class="input-group-text ">
-                                    <i class="fa fa-user fa-lg" style="width: 100%; height: auto;"></i></span>
-                                    <input type="text" class="form-control w-100" placeholder="Username" formControlName="username">
+                                    <i class="fa fa-envelope fa-lg" style="width: 100%; height: auto;"></i></span>
+                                    <input type="text" class="form-control w-100" placeholder="email" formControlName="email">
                                    
                             </div>
-                            <div *ngIf="!this.loginForm.get('username')?.valid && loginForm.get('username')?.touched"
-                            class="help-block" style="color: rgb(255, 2, 2) !important;">Please enter a valid username
+                            <div *ngIf="!this.loginForm.get('email')?.valid && loginForm.get('email')?.touched"
+                            class="help-block" style="color: rgb(255, 2, 2) !important;">Please enter a valid email
                         </div>
                                 
                                 
@@ -39,10 +39,10 @@
                         </div>
 
                         <hr>
-                        <div class="flex form-group">
-                            <div class="row align-items-center remember">
+                        <div class="d-flex form-group justify-content-end">
+                            <!-- <div class="row align-items-center remember">
                                 <input type="checkbox">Remember Me
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <button type="submit" class="btn" 
                                     style="background-color: #fac901;">Login</button>
@@ -53,9 +53,6 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-center links">
                         Don't have an account?<a [routerLink]="['/register']">Sign Up</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <a href="">Forgot your password?</a>
                     </div>
                 </div>
             </div>

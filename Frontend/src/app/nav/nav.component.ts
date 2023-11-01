@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../customer/cart/cart.service';
 import { UserService } from '../customer/user.service';
+import { AuthService } from '../shared/login/service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,7 @@ import { UserService } from '../customer/user.service';
 })
 export class NavComponent {
 
-  constructor(private cartService: CartService, private userService:UserService){}
+  constructor(private cartService: CartService, private userService:UserService,private authService:AuthService){}
   
   getCartCount(){
     return this.cartService.getTotalQuantity();
@@ -19,6 +20,13 @@ export class NavComponent {
     return 'customer';
   }
   getFirstName(){
-    return this.userService.getUser();
+    // return this.userService.getFirstName();
+    return null;
+  }
+  onLogout(){
+    this.authService.logout();
+  }
+  getRole(){
+    return this.userService.getRole();
   }
 }
