@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+.nav-text{
+    padding: 2vw;
+    font-size: .75rem;
+    font-weight: 600;
+    color: #777;
+    font-family: Metropolis-SemiBold,Serif,Sans-Serif;
+}
+.container1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-item1{
+    justify-content: center;
+    width: 33%;
+}
+.nav-item2{
+}
+.nav1{
+    padding-left: 10vw;
+}
+
+.badge{
+    left: 26%;
+}
+img{
+    height: 55vh;
+}
+
+.bg-primary{
+    background-color: #e5345b;
+}
+/* .main{
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+} */
+.card{
+    margin-top: 4%;
+    width: 98%;
+    height: 95%;
+}
+.justify-space-between{
+    justify-content: space-between;
+}
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav {
+    max-width: 100vw;
+    margin: 0 auto;
+    margin-left: 2.9vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.tabs{
+    background-color:aliceblue;
+    display: flex;
+}
+
+.tabs ul{
+    
+    font-size: 24px;
+    list-style: none;
+    
+}
+.tabs ul li a img{
+    height: 10vh;
+}
+.tabs div.scrollmenu{
+    overflow:unset;
+    white-space: nowrap;
+}
+.tabs div.scrollmenu a {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 0 1vh;
+    text-decoration: none;
+}
+.tabs div.scrollmenu a img{
+    height: 10vh;
+}
+
+
+
+main{
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-template-rows: 25vw 25vw 25vw 25vw;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.product img {
+    max-width: 100%;
+}
+
+.product h2 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.product p {
+    margin: 10px 0;
+}
+
+.product span {
+    font-weight: bold;
+}
+
+.product button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+} */

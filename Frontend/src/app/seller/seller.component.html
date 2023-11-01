@@ -1,1 +1,36 @@
-<p>seller works!</p>
+<main class="container">
+    <div class="d-flex justify-space-between" style="padding: 2vh 0vw;">
+        <div>
+            <h2>Users</h2>
+        </div>
+        <form class="form-inline my-2 my-lg-0 d-flex">
+            <input class="form-control mr-sm-2"  placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="submit" style="color: rgb(0, 0, 0);">Search</button>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">#</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">First Name</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Last Name</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Role</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Phone Number</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.img}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td><button class="btn btn-danger" >Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+</main>

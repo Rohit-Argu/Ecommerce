@@ -24,10 +24,13 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <button type="button" class="btn position-relative" (click)="onLogout()">
+                        <i class="fa fa-sign-out fa-lg" style="color: white;"></i>
+                    </button>
                     <button type="button" class="btn position-relative" routerLink="/user">
                         <i class="fa fa-user fa-lg" style="color: white;"></i>
                     </button>
-                    <button type="button" class="btn position-relative" routerLink="/cart">
+                    <button type="button" class="btn position-relative" routerLink="/cart" *ngIf="getRole()==='customer'">
                         <i class="fa fa-shopping-cart fa-lg" style="color: white;"></i>
                         <span *ngIf="getCartCount()" class="position-aboslute top-0 translate-middle badge bg-primary">{{getCartCount()}}</span>
                     </button>
@@ -37,3 +40,4 @@
 
     </div>
 </nav>
+<router-outlet></router-outlet>

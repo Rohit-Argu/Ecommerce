@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductModel } from '../shared/model/product.model';
 
 @Component({
   selector: 'app-seller',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./seller.component.css']
 })
 export class SellerComponent {
+  products: ProductModel[]=[];
 
 }

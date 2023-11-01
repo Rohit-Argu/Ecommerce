@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,7 @@ export class UserComponent implements OnInit{
   option1="cart";
   option2="orders";
 
-  constructor(private router: Router,private route: ActivatedRoute){}
+  constructor(private router: Router,private route: ActivatedRoute,private userService:UserService){}
   ngOnInit(): void {
     if(this.acnt_type==='seller'){
       this.option1="addProduct";
@@ -22,6 +23,7 @@ export class UserComponent implements OnInit{
       this.option1="deleteUser";
       this.option2="viewUsers";
     }
+    this.getUser();
   }
 
 
@@ -33,5 +35,13 @@ export class UserComponent implements OnInit{
   }
   getAcntType(){
     return this.acnt_type;
+  }
+  getUser(){
+    this.userService.getUser().subscribe(
+      (user)=>{
+        console.log(user);
+      }
+    );
+    
   }
 }
