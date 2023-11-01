@@ -11,11 +11,11 @@ export class AuthInterceptorService implements HttpInterceptor{
         }
         else{
             modifiedReq=req.clone({
-                headers: req.headers.append("token",token)
+                setHeaders: { Authorization: `Bearer ${token}` }
             });
         }
         
-        return next.handle(req);
+        return next.handle(modifiedReq);
     }
 
 }

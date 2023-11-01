@@ -1,11 +1,22 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { UserModel } from "../shared/model/user.model";
-import { Subject } from "rxjs";
+import { Subject, first } from "rxjs";
+import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { User1Model } from "../shared/model/user1.model";
+import { User2Model } from "../shared/model/user2.model";
 
 @Injectable({providedIn:'root'})
 export class UserService{
 
+    userChanges=new Subject<User2Model>();
+    user:User2Model= {
+        email: '',
+        firstName: '',
+        lastName: '',
+        role: '',
+        createdAt:''
+      };
     constructor(private http:HttpClient){}
 
     usersChange=new Subject<UserModel[]>();
@@ -33,7 +44,6 @@ export class UserService{
         role: 'admin',
         phoneNo: '6491537854'
     }]
-
     getUsers(){
         return this.users.slice();
     }
@@ -45,9 +55,24 @@ export class UserService{
         this.usersChange.next(this.users.slice());
     }
     getRole(){
-        return this.users[0].role;
+        return this.user.role;
     }
     getUser(){
-        return this.http.get('http://localhost:8080/api/v1/user/getUser');
+        this.http.get<User1Model>('http://localhost:8080/api/v1/user/getUser').subscribe(
+            (data)=>{
+                this.user = {
+                    email: data.email,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    role: this.lowercase(data.role),
+                    createdAt:data.createdAt.substring(0,10)
+                  };
+                  this.userChanges.next(this.user);
+            }
+        );
+        return this.user;
     }
+    lowercase(s:string) {
+        return s.toLowerCase();
+      }
 }

@@ -1,4 +1,4 @@
-<main class="container">
+<main ng-app="sd" class="container">
     <div class="d-flex justify-space-between" style="padding: 2vh 0vw;">
         <div>
             <h2>Users</h2>
@@ -15,7 +15,7 @@
             <th style="background-color: rgb(253, 179, 82);" scope="col">First Name</th>
             <th style="background-color: rgb(253, 179, 82);" scope="col">Last Name</th>
             <th style="background-color: rgb(253, 179, 82);" scope="col">Role</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">Phone Number</th>
+            <!-- <th style="background-color: rgb(253, 179, 82);" scope="col">Phone Number</th> -->
             <th style="background-color: rgb(253, 179, 82);" scope="col">Action</th>
           </tr>
         </thead>
@@ -25,10 +25,18 @@
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.role}}</td>
-            <td>{{user.phoneNo}}</td>
+            <!-- <td>{{user.phoneNo}}</td> -->
             <td><button class="btn btn-danger" (click)="onDelete(i)">Delete</button></td>
           </tr>
         </tbody>
+      </table>
+      <table ng-table="demo.tableParams" show-filter="true" class="table table-bordered table-striped">
+        <tr *ngFor="let user of users; let i=index">
+          <td title="'Installation At'" filter="{installationAt: 'text'}" sortable="'installationAt'">{{ user.firstName }} {{ user.lastName }}</td>
+          <td title="'Admin Email'" filter="{adminEmail: 'text'}" sortable="'adminEmail'">{{ user.role | uppercase}}</td>
+          <td title="'Powered By'" filter="{poweredBy: 'text'}" sortable="'poweredBy'"> +91 {{ user.phoneNo }}</td>
+          <!-- <td title="'Powered By Icon'" filter="{poweredByIcon: 'text'}" sortable="'poweredByIcon'">{{ user.phoneNo }}</td> -->
+        </tr>
       </table>
       
 

@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit{
 
   constructor(private router:Router,private productService: ProductService,private route:ActivatedRoute,private ordersService:OrdersService, private cartService: CartService,private changeDetectorRef:ChangeDetectorRef){}
   ngOnInit(): void {
+    this.productService.fetchCards();
     this.cards=this.productService.getCards();
     
     this.changeDetectorRef.detectChanges();

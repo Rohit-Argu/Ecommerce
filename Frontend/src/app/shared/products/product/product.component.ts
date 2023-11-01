@@ -14,10 +14,11 @@ export class ProductComponent implements OnInit {
   id:number=0;
   quantity:number=1
   product:ProductModel={
+    id:0,
     img:"",
-    category:"",
     name:"",
     price:0,
+    stock:0,
     description:""
 };
   constructor(private router:Router,private route:ActivatedRoute,private productService:ProductService, private location:Location,private cartService:CartService){}
