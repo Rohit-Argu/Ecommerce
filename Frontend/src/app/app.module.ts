@@ -44,7 +44,7 @@ import { AuthInterceptorService } from './shared/login/service/auth-interceptor.
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,

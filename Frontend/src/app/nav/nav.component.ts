@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../customer/cart/cart.service';
 import { UserService } from '../customer/user.service';
 import { AuthService } from '../shared/login/service/auth.service';
@@ -8,10 +8,16 @@ import { AuthService } from '../shared/login/service/auth.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements OnInit{
 
+  role="";
   constructor(private cartService: CartService, private userService:UserService,private authService:AuthService){}
   
+  ngOnInit(){
+    this.userService.getUser();
+    this.getRole();
+  }
+
   getCartCount(){
     return this.cartService.getTotalQuantity();
   }
@@ -27,6 +33,13 @@ export class NavComponent {
     this.authService.logout();
   }
   getRole(){
-    return this.userService.getRole();
+    this.role=this.userService.getRole();
+    this.userService.userChanges.subscribe(
+      (user)=>{
+        this.role=user.role.toLowerCase();
+        console.log(this.role);
+      }
+    )
+    console.log(this.role);
   }
 }

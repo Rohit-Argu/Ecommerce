@@ -30,7 +30,7 @@
                     <button type="button" class="btn position-relative" routerLink="/user">
                         <i class="fa fa-user fa-lg" style="color: white;"></i>
                     </button>
-                    <button type="button" class="btn position-relative" routerLink="/cart" *ngIf="getRole()==='customer'">
+                    <button type="button" class="btn position-relative" routerLink="/cart" *ngIf="role==='customer'">
                         <i class="fa fa-shopping-cart fa-lg" style="color: white;"></i>
                         <span *ngIf="getCartCount()" class="position-aboslute top-0 translate-middle badge bg-primary">{{getCartCount()}}</span>
                     </button>

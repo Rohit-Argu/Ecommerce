@@ -9,9 +9,9 @@
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5IZRPIWlJphtvxV0mE9wZ83HJJeMskrUZLA&usqp=CAU"
             class="card-img-top" alt="User's Profile Picture">
           <div class="card-body">
-            <h5 class="card-title">John Doe</h5>
-            <p class="card-text">Email: john.doe@example.com</p>
-            <p class="card-text">Account Type: {{acnt_type}}</p>
+            <h5 class="card-title">{{user.firstName}}</h5>
+            <p class="card-text">Email: {{user.email}}</p>
+            <p class="card-text">Account Type: {{user.role}}</p>
             <li class="list-group-item"><a routerLink=""
                 class="text-dark text-decoration-none fw-bold cursor-pointer">Edit Profile</a></li>
           </div>
@@ -21,9 +21,9 @@
         <h1>User Profile</h1>
         <div class="row">
           <ul class="list-group">
-            <li class="list-group-item"><strong>Username:</strong> johndoe123</li>
-            <li class="list-group-item"><strong>Location:</strong> New York, USA</li>
-            <li class="list-group-item"><strong>Member Since:</strong> January 1, 2020</li>
+            <li class="list-group-item"><strong>Firstname:</strong> {{user.firstName}}</li>
+            <li class="list-group-item"><strong>LastName:</strong> {{user.lastName}}</li>
+            <li class="list-group-item"><strong>Member Since:</strong> {{user.createdAt}}</li>
 
           </ul>
         </div>
