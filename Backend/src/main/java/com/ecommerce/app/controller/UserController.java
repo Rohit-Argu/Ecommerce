@@ -16,7 +16,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/getUsers")
+    @GetMapping("/admin/getUsers")
     public ResponseEntity<List<User>> getUsers() {
         return this.userService.getUsers();
     }
@@ -31,32 +31,32 @@ public class UserController {
         return this.userService.updateUser(user);
     }
 
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/admin/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         return this.userService.deleteUser(id);
     }
 
-    @PostMapping("/addAddress")
+    @PostMapping("/address/addAddress")
     public ResponseEntity<Address> addAddress(@RequestBody Address address) {
         return this.userService.addAddress(address);
     }
 
-    @GetMapping("/allAddress")
+    @GetMapping("/customer/allAddress")
     public ResponseEntity<List<Address>> getAddresses() {
         return this.userService.getAddresses();
     }
 
-    @GetMapping("/address/{id}")
+    @GetMapping("/customer/address/{id}")
     public ResponseEntity<Address> getAddress(@PathVariable int id) {
         return this.userService.getAddress(id);
     }
 
-    @PutMapping("/updateAddress/{id}")
+    @PutMapping("/customer/updateAddress/{id}")
     public ResponseEntity<Address> updateAddress(@PathVariable int id, @RequestBody Address address) {
         return this.userService.updateAddress(id, address);
     }
 
-    @DeleteMapping("/deleteAddress/{id}")
+    @DeleteMapping("/customer/deleteAddress/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable int id) {
         return this.userService.deleteAddress(id);
     }

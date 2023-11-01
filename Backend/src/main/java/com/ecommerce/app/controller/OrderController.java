@@ -16,7 +16,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("/placeOrder/{addressId}")
+    @PostMapping("/customer/placeOrder/{addressId}")
     public ResponseEntity<Order> placeOrder(@PathVariable int addressId, @RequestBody Payment payment) {
         return this.orderService.placeOrder(addressId,payment);
     }
@@ -25,7 +25,7 @@ public class OrderController {
     public ResponseEntity<List<Order>> allOrders() {
         return this.orderService.getAllOrders();
     }
-    @GetMapping("/orderHistory")
+    @GetMapping("/customer/orderHistory")
     public ResponseEntity<List<Order>> orderHistory() {
         return this.orderService.orderHistory();
     }
