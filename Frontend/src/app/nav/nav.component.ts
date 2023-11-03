@@ -39,7 +39,7 @@ export class NavComponent implements OnInit{
         this.role=user.role.toLowerCase();
         console.log(this.role);
       }
-    )
+    );
     console.log(this.role);
   }
 }

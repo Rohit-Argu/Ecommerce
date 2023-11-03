@@ -58,7 +58,7 @@ export class ProductService {
     //     "Some quick example text to build on the card title and make up the bulk of the card's content.",
     // },
   ];
-  product: ProductModel[] = [
+  products: ProductModel[] = [
     
     //     {
     //     img:"https://rukminim2.flixcart.com/image/850/1000/xif0q/shoe/k/k/r/7-article-03-b-asiatick-black-black-original-imagk4k27sgezkwd.jpeg?q=20",
@@ -117,6 +117,14 @@ export class ProductService {
     //     description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo animi id totam libero illum dolorum atque iure quis odio, dolorem voluptatibus quam facere fuga fugit distinctio. Consequatur consectetur, repudiandae atque nam dignissimos aut. Doloribus mollitia molestiae porro rem esse repudiandae sequi corrupti veniam veritatis consectetur inventore, iusto officiis. Labore, rerum!"
     // }
   ];
+  product:ProductModel={
+    id:0,
+    img:'',
+    name:'',
+    price:0,
+    stock:0,
+    description:''
+  };
   fetchCards() {
     return this.http
       .get<Product1Model[]>(
@@ -125,29 +133,33 @@ export class ProductService {
       .subscribe((data) => {
         console.log(data.length);
         for(let i=0;i<data.length;i++){
-          this.product.push({
+          this.products.push({
             id: data[i].id,
             img: data[i].image,
             name: data[i].name,
             price: data[i].price,
             stock: data[i].stock,
-            description: data[i].description,
+            description: data[i].description
           });
           this.cards.push({
+            id:data[i].id,
             img: data[i].image,
             name: data[i].name,
             description: data[i].description,
           });
         }
         
-        console.log(this.product);
+        console.log(this.products);
       });
   }
   getCards() {
     return this.cards;
   }
   getProducts(i: number) {
-    return this.product[i];
+    return this.http
+      .get<Product1Model>(
+        'http://localhost:8080/api/v1/product/viewProduct/'+i
+      )
   }
   search(text: string) {
     console.log(text);

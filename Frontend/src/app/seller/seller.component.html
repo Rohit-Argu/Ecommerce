@@ -3,31 +3,31 @@
         <div>
             <h2>Users</h2>
         </div>
-        <form class="form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mr-sm-2"  placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary" type="submit" style="color: rgb(0, 0, 0);">Search</button>
-        </form>
+        <button class="btn btn-success" type="submit" routerLink="/addProduct">Add Product +</button>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped text-center">
         <thead>
           <tr>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">#</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">First Name</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">Last Name</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">Role</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">Phone Number</th>
-            <th style="background-color: rgb(253, 179, 82);" scope="col">Action</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">image</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Name</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Price</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Stock</th>
+            <th style="background-color: rgb(253, 179, 82);" scope="col">Description</th>
+            <th style="background-color: rgb(253, 179, 82);width: 30%;" scope="col"><form class="form-inline my-2 my-lg-0 d-flex">
+              <input class="form-control mr-sm-2"  placeholder="Search" aria-label="Search" style="width: 100%;">
+              <button class="btn btn-outline-secondary" type="submit" style="color: rgb(0, 0, 0);">Search</button>
+          </form></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let product of products; let i=index">
-            <th scope="row">{{i+1}}</th>
             <td>{{product.img}}</td>
             <td>{{product.name}}</td>
-            <td>{{product.name}}</td>
             <td>{{product.price}}</td>
+            <td>{{product.stock}}</td>
             <td>{{product.description}}</td>
-            <td><button class="btn btn-danger" >Delete</button></td>
+            <td ><button class="btn btn-outline-secondary" (click)="editItem(i)">Edit</button>
+           <button class="btn btn-danger" (click)="deleteItem(i)">Delete</button></td>
           </tr>
         </tbody>
       </table>

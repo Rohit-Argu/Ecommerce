@@ -65,7 +65,7 @@
     <main class="bg-dark">
         <div class="container mt-4"></div>
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of cards;let i=index" style="cursor: pointer;" (click)="details(i)">
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of cards;let i=index" style="cursor: pointer;" (click)="details(item.id)">
                 <div class="card">
                     <div style="height: 50vh;">
                         <img class="card-img-top" style="max-height: 50vh;" [src]="item.img" alt="Card image cap">

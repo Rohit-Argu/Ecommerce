@@ -4,6 +4,8 @@ import { OrdersModel } from "src/app/shared/model/orders.model";
 import { CartService } from "../cart/cart.service";
 import { OrderDetailsModel } from "src/app/shared/model/order.details.model";
 import { CartProductModel } from "src/app/shared/model/cart.product.model";
+import { User2Model } from "src/app/shared/model/user2.model";
+import { CartProduct1Model } from "src/app/shared/model/CartProduct.model";
 
 @Injectable({providedIn:'root'})
 export class OrdersService{
@@ -20,7 +22,7 @@ export class OrdersService{
       getOrderDetails(){
         return this.orderDetails.slice();
       }
-  addOrder(order:OrdersModel,products: CartProductModel[]){
+  addOrder(order:OrdersModel,products: CartProduct1Model){
     this.orders.push(order);
     this.ordersChanged.next(this.orders.slice());
     let orderDetail:OrderDetailsModel={
@@ -28,12 +30,12 @@ export class OrdersService{
       totalPrice: order.totalPrice,
       deliveryDate: new Date()
     }
-    for( let product of products){
+    for( let product of products.cartDetails){
       orderDetail.products.push({
-        img: product.img,
-        category: product.category,
-        name:product.name,
-        price: product.price,
+        img: '',
+        category: '',
+        name:product.product.name,
+        price: product.product.price,
         quantity:product.quantity
       })
     }
@@ -42,4 +44,5 @@ export class OrdersService{
     
     this.cartService.emptyCart();
   }
+  
 }

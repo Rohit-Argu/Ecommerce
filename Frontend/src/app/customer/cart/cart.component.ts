@@ -6,6 +6,10 @@ import { CartService } from './cart.service';
 import { OrdersService } from '../orders/orders.service';
 import { OrdersModel } from 'src/app/shared/model/orders.model';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { ErrorHandlerService } from 'src/app/errorHandler.service';
+import { CartProduct1Model } from 'src/app/shared/model/CartProduct.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -14,49 +18,64 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit{
 
+  totalQ:number=0;
+  items: CartProduct1Model={
+    id:0,
+    cartDetails:[],
+    amount:0
+  };
+  
 
-  items: CartProductModel[]=[];
-
-  constructor(private location: Location,private cartService: CartService,private ordersService:OrdersService,private router: Router){}
+  constructor(private error:ErrorHandlerService,private location: Location,private cartService: CartService,private ordersService:OrdersService,private router: Router,private userService:UserService){}
   
 
   ngOnInit(): void {
-    this.items=this.cartService.getItems();
+    if(this.userService.getRole()!=='customer'){
+      
+      this.error.handle('Cannot access this!')
+    }
+    this.cartService.fetchCart().subscribe(
+      (data)=>{
+        this.items=data;
+      }
+     );
     this.cartService.itemChanges.subscribe(
-      (items:CartProductModel[])=>{
-        this.items=items;
-        console.log(this.items.length);
+      (a)=>{
+        this.cartService.fetchCart().subscribe(
+          (data)=>{
+            this.items=data;
+          }
+         );
       }
     )
     console.log('in cart');
   }
   onChanges(){
-    this.items=this.cartService.getItems();
+   
   }
 
   onQuantityDecrease(i:number){
-    if(this.items[i].quantity===1){
-      this.items.splice(i,1);
+    if(this.items.cartDetails[i].quantity===1){
+      this.cartService.deleteItem(i);
     }
     else
-    this.items[i].quantity--;
+    this.cartService.decreaseItemQuantity(this.items.cartDetails[i].product.id);
   this.cartService.itemChanged();
   }
   onQuantityIncrease(i:number){
-    if(this.items[i].quantity===5){
-      alert("Cannot add more than 5 of same item")
+    if(this.items.cartDetails[i].quantity===5){
+      alert("Cannot Add Anymore item");
     }
-    else
-    this.items[i].quantity++;
-    this.cartService.itemChanged();
+    else{
+      this.cartService.increaseItemQuantity(this.items.cartDetails[i].product.id);
+    }
+    
+  this.cartService.itemChanged();
   }
 
   getPrice(){
-    let price:number=0;
-    for(let item of this.items){
-      price+=(item.price*item.quantity);
-    }
-    return price;
+    
+    return this.items.amount;
   }
   goBack(){
     this.location.back();
@@ -65,13 +84,9 @@ export class CartComponent implements OnInit{
     this.cartService.removeFromCart(i);
   }
   onBuy(){
-    let sum=0;
-        for(const item of this.items){
-          sum=sum+item.price;
-        }
     const order:OrdersModel={
-      numberOfItems: this.items.length,
-      totalPrice: sum,
+      numberOfItems: this.items.cartDetails.length,
+      totalPrice: this.items.amount,
       deliveryStatus: "Shipping",
       show: false
     };

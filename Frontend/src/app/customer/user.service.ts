@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class UserService{
 
     userChanges=new Subject<User2Model>();
-    id: number=0;
+    id:number=0;
     user:User2Model= {
         email: '',
         firstName: '',
@@ -21,7 +21,7 @@ export class UserService{
         createdAt:'',
         phone:''
       };
-    constructor(private http:HttpClient, private router: Router){}
+    constructor(private http:HttpClient,private router:Router){}
 
     usersChange=new Subject<UserModel[]>();
     users:UserModel[]=[{
