@@ -18,7 +18,8 @@ export class UserComponent implements OnInit {
     firstName: '',
     lastName: '',
     role: '',
-    createdAt:''
+    createdAt:'',
+    phone:''
   };
   acnt_type = 'admin';
   option1 = 'cart';
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
         this.user=data;
         if (data.role === 'seller') {
           this.option1 = 'addProduct';
-          this.option2 = 'listedOrders';
+          this.option2 = 'listedProducts';
         } else if (data.role === 'admin') {
           this.option1 = 'deleteUser';
           this.option2 = 'viewUsers';

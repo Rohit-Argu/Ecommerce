@@ -5,19 +5,22 @@ import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { User1Model } from "../shared/model/user1.model";
 import { User2Model } from "../shared/model/user2.model";
+import { Router } from "@angular/router";
 
 @Injectable({providedIn:'root'})
 export class UserService{
 
     userChanges=new Subject<User2Model>();
+    id:number=0;
     user:User2Model= {
         email: '',
         firstName: '',
         lastName: '',
         role: '',
-        createdAt:''
+        createdAt:'',
+        phone:''
       };
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,private router:Router){}
 
     usersChange=new Subject<UserModel[]>();
     users:UserModel[]=[{
@@ -57,15 +60,20 @@ export class UserService{
     getRole(){
         return this.user.role;
     }
+    getId(){
+        return this.id;
+    }
     getUser(){
         this.http.get<User1Model>('http://localhost:8080/api/v1/user/getUser').subscribe(
             (data)=>{
+                this.id=data.id
                 this.user = {
                     email: data.email,
                     firstName: data.firstName,
                     lastName: data.lastName,
                     role: this.lowercase(data.role),
-                    createdAt:data.createdAt.substring(0,10)
+                    createdAt:data.createdAt.substring(0,10),
+                    phone:data.phone
                   };
                   this.userChanges.next(this.user);
             }
@@ -74,5 +82,13 @@ export class UserService{
     }
     lowercase(s:string) {
         return s.toLowerCase();
-      }
+    }
+    editUser(u:User2Model){
+        this.http.put('http://localhost:8080/api/v1/user/updateUser',u).subscribe(
+            (data)=>{
+                console.log(data);
+                this.router.navigate(['/user'])
+            }
+        )
+    }
 }

@@ -17,9 +17,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserComponent } from './customer/user.component';
 import { ProductComponent } from './shared/products/product/product.component';
 import { OrderDetailsComponent } from './customer/orders/order-details/order-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
 import { AuthInterceptorService } from './shared/login/service/auth-interceptor.service';
+import { AddProductComponent } from './seller/add-product/add-product.component';
+import { EditProductComponent } from './seller/edit-product/edit-product.component';
+import { EditProfileComponent } from './customer/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -37,12 +40,16 @@ import { AuthInterceptorService } from './shared/login/service/auth-interceptor.
     UserComponent,
     ProductComponent,
     OrderDetailsComponent,
-    NavComponent
+    NavComponent,
+    AddProductComponent,
+    EditProductComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],

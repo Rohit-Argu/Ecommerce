@@ -1,5 +1,6 @@
-export class CardModel{
-    img:string="";
-    name:string = "";
-    description:string="";
+export interface CardModel{
+    id:number;
+    img:string;
+    name:string;
+    description:string;
 }

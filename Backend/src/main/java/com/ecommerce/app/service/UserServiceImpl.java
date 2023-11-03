@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
         User user1 = this.getUser().getBody();
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
-        user1.setPhone(user.getLastName());
+        user1.setPhone(user.getPhone());
         userRepository.save(user1);
         return ResponseEntity.ok(user1);
     }

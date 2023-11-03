@@ -4,9 +4,10 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { CardModel } from '../model/card.model';
 import { ProductService } from './product.service';
 import { CartService } from 'src/app/customer/cart/cart.service';
-import { CartProductModel } from '../model/cart.product.model';
+
 import { OrdersService } from 'src/app/customer/orders/orders.service';
 import { OrderDetailsModel } from '../model/order.details.model';
+import { UserService } from 'src/app/customer/user.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit{
   cart=faShoppingCart;
   user='customer';
 
-  constructor(private router:Router,private productService: ProductService,private route:ActivatedRoute,private ordersService:OrdersService, private cartService: CartService,private changeDetectorRef:ChangeDetectorRef){}
+  constructor(private router:Router,private productService: ProductService,private route:ActivatedRoute,private ordersService:OrdersService, private cartService: CartService,private changeDetectorRef:ChangeDetectorRef,private userService:UserService){}
   ngOnInit(): void {
     this.productService.fetchCards();
     this.cards=this.productService.getCards();

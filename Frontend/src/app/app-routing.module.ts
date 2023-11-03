@@ -12,6 +12,9 @@ import { SellerComponent } from './seller/seller.component';
 import { OrderDetailsComponent } from './customer/orders/order-details/order-details.component';
 import { ProductComponent } from './shared/products/product/product.component';
 import { NavComponent } from './nav/nav.component';
+import { AddProductComponent } from './seller/add-product/add-product.component';
+import { EditProductComponent } from './seller/edit-product/edit-product.component';
+import { EditProfileComponent } from './customer/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -27,6 +30,7 @@ const routes: Routes = [
       { path: 'products/:id', component: ProductComponent },
       { path: 'admin', component: AdminComponent },
       { path: 'user', component: UserComponent },
+      { path: 'editProfile', component: EditProfileComponent },
       { path: 'cart', component: CartComponent },
       {
         path: 'orders',
@@ -38,7 +42,9 @@ const routes: Routes = [
           },
         ],
       },
-      { path: 'seller', component: SellerComponent },
+      { path: 'listedProducts', component: SellerComponent },
+      { path: 'addProduct' , component:AddProductComponent},
+      { path: 'editProduct/:id' , component:EditProductComponent},
       { path: 'viewUsers', component: AdminComponent },
     ],
   },

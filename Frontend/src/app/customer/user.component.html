@@ -12,7 +12,7 @@
             <h5 class="card-title">{{user.firstName}}</h5>
             <p class="card-text">Email: {{user.email}}</p>
             <p class="card-text">Account Type: {{user.role}}</p>
-            <li class="list-group-item"><a routerLink=""
+            <li class="list-group-item"><a routerLink="/editProfile"
                 class="text-dark text-decoration-none fw-bold cursor-pointer">Edit Profile</a></li>
           </div>
         </div>
@@ -24,6 +24,7 @@
             <li class="list-group-item"><strong>Firstname:</strong> {{user.firstName}}</li>
             <li class="list-group-item"><strong>LastName:</strong> {{user.lastName}}</li>
             <li class="list-group-item"><strong>Member Since:</strong> {{user.createdAt}}</li>
+            <li class="list-group-item"><strong>Phone Number:</strong>+91 {{user.phone}}</li>
 
           </ul>
         </div>
