@@ -23,6 +23,14 @@ import { AuthInterceptorService } from './shared/login/service/auth-interceptor.
 import { AddProductComponent } from './seller/add-product/add-product.component';
 import { EditProductComponent } from './seller/edit-product/edit-product.component';
 import { EditProfileComponent } from './customer/edit-profile/edit-profile.component';
+import * as ngBootstrap from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -52,6 +60,14 @@ import { EditProfileComponent } from './customer/edit-profile/edit-profile.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ngBootstrap.NgbModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,

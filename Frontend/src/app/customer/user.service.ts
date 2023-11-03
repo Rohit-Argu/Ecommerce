@@ -1,10 +1,11 @@
 import { Injectable, OnInit } from "@angular/core";
 import { UserModel } from "../shared/model/user.model";
-import { Subject, first } from "rxjs";
+import { Observable, Subject, first } from "rxjs";
 import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { User1Model } from "../shared/model/user1.model";
 import { User2Model } from "../shared/model/user2.model";
+import { UsersResp } from "../admin/UsersResp";
 import { Router } from "@angular/router";
 
 @Injectable({providedIn:'root'})
@@ -47,22 +48,20 @@ export class UserService{
         role: 'admin',
         phoneNo: '6491537854'
     }]
-    getUsers(){
-        return this.users.slice();
-    }
-    // getUser(){
-    //     return this.users[0].firstName;
-    // }
+
     deleteUser(i:number){
         this.users.splice(i,1);
         this.usersChange.next(this.users.slice());
     }
+
     getRole(){
         return this.user.role;
     }
-    getId(){
+
+    getId() {
         return this.id;
     }
+
     getUser(){
         this.http.get<User1Model>('http://localhost:8080/api/v1/user/getUser').subscribe(
             (data)=>{
@@ -82,8 +81,28 @@ export class UserService{
     }
     lowercase(s:string) {
         return s.toLowerCase();
-    }
-    editUser(u:User2Model){
+      }
+
+      getUsers(
+        page: number,
+        size: number,
+        sortField: string,
+        sortOrder: string,
+        // filterField: string,
+        filterValue: string
+      ): Observable<UsersResp> {
+        const params = new HttpParams()
+          .set('page', page.toString())
+          .set('size', size.toString())
+          .set('sortField', sortField)
+          .set('sortOrder', sortOrder)
+        //   .set('filterField', filterField)
+          .set('filterValue', filterValue);
+    
+        return this.http.get<UsersResp>('http://localhost:8080/api/v1/user/admin/getUsers', { params });
+      }
+
+      editUser(u:User2Model){
         this.http.put('http://localhost:8080/api/v1/user/updateUser',u).subscribe(
             (data)=>{
                 console.log(data);
