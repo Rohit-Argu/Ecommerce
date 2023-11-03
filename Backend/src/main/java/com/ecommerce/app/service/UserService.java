@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserService {
     UserDetailsService userDetailsService();
 
-    ResponseEntity<UsersResp> getUsers(int page, int size, String sortField, String filterField, String filterValue);
+    ResponseEntity<UsersResp> getUsers(int page, int size, String sortField, String sortOrder, String filterValue);
 
     ResponseEntity<User> getUser();
 

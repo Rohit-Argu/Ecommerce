@@ -20,12 +20,13 @@ public class UserController {
     @GetMapping("/admin/getUsers")
     public ResponseEntity<UsersResp> getUsers(
             @RequestParam(defaultValue = "0", required = false) int page,
-            @RequestParam(defaultValue = "2", required = false) int size,
+            @RequestParam(defaultValue = "10", required = false) int size,
             @RequestParam(defaultValue = "id", required = false) String sortField,
-            @RequestParam(defaultValue = "", required = false) String filterField,
+            @RequestParam(defaultValue = "asc", required = false) String sortOrder,
+//            @RequestParam(defaultValue = "", required = false) String filterField,
             @RequestParam(defaultValue = "", required = false) String filterValue
     ) {
-        return this.userService.getUsers(page, size, sortField, filterField, filterValue);
+        return this.userService.getUsers(page, size, sortField, sortOrder, filterValue);
     }
 
     @GetMapping("/getUser")
