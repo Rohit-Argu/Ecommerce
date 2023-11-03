@@ -5,6 +5,7 @@ import com.ecommerce.app.entity.Address;
 import com.ecommerce.app.entity.User;
 import com.ecommerce.app.repository.AddressRepository;
 import com.ecommerce.app.repository.UserRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 @RequiredArgsConstructor
@@ -39,12 +41,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UsersResp> getUsers(int page, int size, String sortField, String filterField, String filterValue) {
+    public ResponseEntity<UsersResp> getUsers(int page, int size, String sortField, String sortOrder, String filterValue) {
 
-        Sort.Direction sortDir = Sort.Direction.ASC;
+        page = page - 1;
+
+        Sort.Direction sortDir;
+        if(sortOrder.equals("asc")){
+        sortDir = Sort.Direction.ASC;}
+        else {sortDir = Sort.Direction.DESC;}
 
         Pageable p = PageRequest.of(page, size, Sort.by(sortDir, sortField));
-        Page<User> pagePost = userRepository.findAll(filterByField(filterField, filterValue), p);
+        Page<User> pagePost;
+
+        if (filterValue.isEmpty()){
+            pagePost = userRepository.findAll(p);
+        } else {
+            pagePost = userRepository.findAll(filterByValue(filterValue), p);
+        }
+
         List<User> allPosts = pagePost.getContent();
 
         UsersResp usersResp = new UsersResp();
@@ -59,9 +73,19 @@ public class UserServiceImpl implements UserService {
         return ResponseEntity.ok(usersResp);
     }
 
-    private Specification<User> filterByField(String filterField, String filterValue) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(filterField), "%" + filterValue + "%");
+    private Specification<User> filterByValue(String filterValue) {
+        return (root, query, criteriaBuilder) -> {
+            String[] fieldsToSearch = {"firstName", "lastName", "email"}; // Replace with actual field names
+            List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
+
+            for (String field : fieldsToSearch) {
+                predicates.add(criteriaBuilder.like(root.get(field), "%" + filterValue + "%"));
+            }
+
+            return criteriaBuilder.or(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
     }
+
 
 
     @Override
@@ -78,7 +102,7 @@ public class UserServiceImpl implements UserService {
         User user1 = this.getUser().getBody();
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
-        user1.setPhone(user.getLastName());
+        user1.setPhone(user.getPhone());
         userRepository.save(user1);
         return ResponseEntity.ok(user1);
     }

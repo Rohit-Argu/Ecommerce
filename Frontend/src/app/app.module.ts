@@ -20,6 +20,14 @@ import { OrderDetailsComponent } from './customer/orders/order-details/order-det
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
 import { AuthInterceptorService } from './shared/login/service/auth-interceptor.service';
+import * as ngBootstrap from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -45,6 +53,14 @@ import { AuthInterceptorService } from './shared/login/service/auth-interceptor.
     FontAwesomeModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ngBootstrap.NgbModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule
   ],
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,

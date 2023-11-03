@@ -18,7 +18,8 @@ export class UserComponent implements OnInit {
     firstName: '',
     lastName: '',
     role: '',
-    createdAt:''
+    createdAt: '',
+    phone: ''
   };
   acnt_type = 'admin';
   option1 = 'cart';
