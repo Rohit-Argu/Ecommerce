@@ -15,6 +15,8 @@ import { NavComponent } from './nav/nav.component';
 import { AddProductComponent } from './seller/add-product/add-product.component';
 import { EditProductComponent } from './seller/edit-product/edit-product.component';
 import { EditProfileComponent } from './customer/edit-profile/edit-profile.component';
+import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
+import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,8 @@ const routes: Routes = [
       { path: 'products/:id', component: ProductComponent },
       { path: 'admin', component: AdminComponent },
       { path: 'user', component: UserComponent },
+      { path: 'savedAddresses', component: SavedAddressesComponent },
+      { path: 'editAddress/:id', component: EditAddressComponent },
       { path: 'editProfile', component: EditProfileComponent },
       { path: 'cart', component: CartComponent },
       {

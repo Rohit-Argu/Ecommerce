@@ -31,8 +31,7 @@ public class CartDetails {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-//    @JsonManagedReference
-    @JsonIgnore
+//    @JsonBackReference
     private Product product;
 
 }

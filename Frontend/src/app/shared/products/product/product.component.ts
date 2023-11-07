@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit {
   }
   addToCart(){
     console.log("adding to cart");
-    this.cartService.addToCart(this.product,this.quantity);
+    this.cartService.addToCart(this.product.id,this.quantity);
     this.router.navigate(['cart']);
   }
 

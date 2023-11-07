@@ -31,6 +31,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
+import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     NavComponent,
     AddProductComponent,
     EditProductComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    SavedAddressesComponent,
+    EditAddressComponent
   ],
   imports: [
     BrowserModule,
