@@ -34,18 +34,11 @@ export class CartComponent implements OnInit{
       
       this.error.handle('Cannot access this!')
     }
-    this.cartService.fetchCart().subscribe(
+    this.cartService.fetCart1();
+    this.cartService.itemChanges.subscribe(
       (data)=>{
         this.items=data;
-      }
-     );
-    this.cartService.itemChanges.subscribe(
-      (a)=>{
-        this.cartService.fetchCart().subscribe(
-          (data)=>{
-            this.items=data;
-          }
-         );
+        this.items.amount.toFixed(2);
       }
     )
     console.log('in cart');
@@ -60,7 +53,7 @@ export class CartComponent implements OnInit{
     }
     else
     this.cartService.decreaseItemQuantity(this.items.cartDetails[i].product.id);
-  this.cartService.itemChanged();
+  // this.cartService.itemChanged();
   }
   onQuantityIncrease(i:number){
     if(this.items.cartDetails[i].quantity===5){
@@ -70,13 +63,9 @@ export class CartComponent implements OnInit{
       this.cartService.increaseItemQuantity(this.items.cartDetails[i].product.id);
     }
     
-  this.cartService.itemChanged();
+  // this.cartService.itemChanged();
   }
 
-  getPrice(){
-    
-    return this.items.amount;
-  }
   goBack(){
     this.location.back();
   }
@@ -93,8 +82,8 @@ export class CartComponent implements OnInit{
     this.ordersService.addOrder(order,this.items);
     this.router.navigate(['orders'])
   }
-  totalQuantity(){
-    return this.cartService.getTotalQuantity();
+  emptyCart(){
+    this.cartService.emptyCart();
   }
 
 }

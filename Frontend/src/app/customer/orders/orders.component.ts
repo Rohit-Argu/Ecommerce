@@ -4,6 +4,7 @@ import { OrdersModel } from 'src/app/shared/model/orders.model';
 import { OrdersService } from './orders.service';
 import { UserService } from '../user.service';
 import { ErrorHandlerService } from 'src/app/errorHandler.service';
+import { OrderModel } from 'src/app/shared/model/Order.model';
 
 @Component({
   selector: 'app-orders',
@@ -12,7 +13,8 @@ import { ErrorHandlerService } from 'src/app/errorHandler.service';
 })
 export class OrdersComponent implements OnInit{
 
-  orders: OrdersModel[]=[];
+  orders: OrderModel[]=[];
+  show:boolean[]=[];
 
   constructor(private router: Router, private route:ActivatedRoute, private ordersService:OrdersService,private userService:UserService,private error:ErrorHandlerService){}
 
@@ -22,16 +24,20 @@ export class OrdersComponent implements OnInit{
     if(this.userService.getRole()!=='customer'){
       this.error.handle('Cannot access this!')
     }
-    this.orders=this.ordersService.getOrders();
-    this.ordersService.ordersChanged.subscribe(
-      (order:OrdersModel[])=>{
+
+    this.ordersService.fetchOrders();
+    this.ordersService.orderChanged.subscribe(
+      (order:OrderModel[])=>{
         this.orders=order;
+        for(let i=0;i<this.orders.length;i++){
+          this.show[i]=false;
+        }
       }
     )
   }
 
   changeShow(index:number){
-    this.orders[index].show=!this.orders[index].show;
+    this.show[index]=!this.show[index];
   }
   // orderDetails(i:number){
   //   this.router.navigate(['',i],{relativeTo:this.route});

@@ -12,17 +12,17 @@
                                 <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
                                 <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
                             </div>
-                            <div *ngFor="let item of orderDetails[index].products">
+                            <div *ngFor="let item of orderDetails">
                                 <div class="card shadow-0 border mb-4">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <img [src]="item.img"
+                                                <img [src]="item.product.image"
                                                     class="img-fluid" alt="Phone">
                                             </div>
                                             <div
                                                 class="col-md-3 text-center d-flex justify-content-center align-items-center">
-                                                <h6 class="text-muted  mb-0 "><small>{{item.name}}</small></h6>
+                                                <h6 class="text-muted  mb-0 "><small>{{item.product.name}}</small></h6>
                                             </div>
                                             
                                             
@@ -32,7 +32,7 @@
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">{{item.price}}</p>
+                                                <p class="text-muted mb-0 small">{{item.product.price}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                             
                             <div class="d-flex justify-content-between pt-2">
                                 <p class="fw-bold mb-0">Order Details</p>
-                                <p class="text-muted mb-0"><span class="fw-bold me-4">Total: </span>{{orders[index].totalPrice}}</p>
+                                <p class="text-muted mb-0"><span class="fw-bold me-4">Total: </span>{{orders[index].amount}}</p>
                             </div>
 
 
@@ -54,7 +54,7 @@
                             style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                             <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
                                 Total
-                                paid: <span class="h2 mb-0 ms-2">{{orders[index].totalPrice+50}}</span></h5>
+                                paid: <span class="h2 mb-0 ms-2">{{orders[index].amount+50.00}}</span></h5>
                         </div>
                     </div>
                 </div>

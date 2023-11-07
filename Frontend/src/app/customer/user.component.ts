@@ -21,8 +21,8 @@ export class UserComponent implements OnInit {
     createdAt:'',
     phone:''
   };
-  acnt_type = 'admin';
-  option1 = 'cart';
+  acnt_type = 'customer';
+  option1 = 'savedAddresses';
   option2 = 'orders';
 
   constructor(
