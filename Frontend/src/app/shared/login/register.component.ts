@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { UserService } from 'src/app/customer/user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { AuthService } from './service/auth.service';
 })
 export class RegisterComponent implements OnInit{
 
-  constructor(private router:Router,private authService:AuthService){}
+  constructor(private router:Router,private authService:AuthService,private userService:UserService){}
 
   registerForm:FormGroup=new FormGroup({
     email:new FormControl(null,Validators.required),
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit{
     this.authService.register(data).subscribe(
       (resData)=>{
         localStorage.setItem('token',resData.token);
+        this.userService.getUser();
         this.router.navigate(['products']);
       }
     );

@@ -22,9 +22,7 @@ export class OrderDetailsComponent implements OnInit{
   constructor(private ordersService: OrdersService,private userService:UserService,private error:ErrorHandlerService){}
 
   ngOnInit(): void {
-    if(this.userService.getRole()!=='customer'){
-      this.error.handle('Cannot access this!')
-    }
+    
     this.orders=this.ordersService.getOrders();
     this.orderDetails=this.ordersService.getOrderDetails(this.index);
     console.log(this.orderDetails);

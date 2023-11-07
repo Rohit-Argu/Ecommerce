@@ -16,9 +16,7 @@ export class SellerComponent implements OnInit{
   constructor(private sellerService:SellerService,private router:Router,private userService:UserService,private error:ErrorHandlerService){}
 
   ngOnInit(): void {
-    if(this.userService.getRole()!=='seller'){
-      this.error.handle('Cannot access this!')
-    }
+   
     this.getProducts();
   }
   getProducts(){

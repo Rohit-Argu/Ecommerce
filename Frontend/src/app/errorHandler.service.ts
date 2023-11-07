@@ -10,7 +10,7 @@ export class ErrorHandlerService{
         // Global error handling logic
         console.log('Global error handling:', error);
         // You can also provide other error-handling logic here
-        alert(error);
-        this.location.back();
+        // alert(error);
+        // this.location.back();
       }
 }
