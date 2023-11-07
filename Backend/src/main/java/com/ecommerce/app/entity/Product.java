@@ -27,9 +27,9 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Lob
+//    @Lob
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "description")
     private String description;
@@ -49,7 +49,8 @@ public class Product {
     private List<OrderDetails> orderDetails;
 
     @OneToMany(mappedBy = "product")
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonIgnore
     private List<CartDetails> cartDetails;
 
 }
