@@ -27,9 +27,9 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Lob
+//    @Lob
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "description")
     private String description;

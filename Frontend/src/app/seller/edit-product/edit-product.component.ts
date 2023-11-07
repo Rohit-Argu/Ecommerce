@@ -18,20 +18,13 @@ export class EditProductComponent implements OnInit{
 
   productForm=new FormGroup({
     'name':new FormControl<string>('',Validators.required),
-    'image':new FormControl('',Validators.required),
     'description':new FormControl<string>('',Validators.required),
     'price':new FormControl<number>(0,Validators.required),
     'stock':new FormControl<number>(0,Validators.required)
   });
 
   id:number=0;
-  addProduct:AddProductModel={
-    name: '',
-    image: '',
-    description: '',
-    price: 0,
-    stock: 0
-  };
+  addProduct:any;
   constructor(private http:HttpClient,private route:ActivatedRoute,private sellerService:SellerService,private userService:UserService,private error:ErrorHandlerService){}
 
   ngOnInit(): void {
@@ -43,7 +36,6 @@ export class EditProductComponent implements OnInit{
       (data)=>{
         this.productForm.setValue({
           'name':data.name,
-          'image':data.image,
           'description':data.description,
           'price':data.price,
           'stock':data.stock
@@ -55,7 +47,6 @@ export class EditProductComponent implements OnInit{
   onSubmit(){
     this.addProduct = {
       name: this.productForm.value.name||'',
-      image: this.productForm.value.image||'',
       description: this.productForm.value.description||'',
       price: this.productForm.value.price||0,
       stock: this.productForm.value.stock||0

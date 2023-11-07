@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
     private Specification<User> filterByValue(String filterValue) {
         return (root, query, criteriaBuilder) -> {
-            String[] fieldsToSearch = {"firstName", "lastName", "email"}; // Replace with actual field names
+            String[] fieldsToSearch = {"firstName", "lastName", "email"};
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
 
             for (String field : fieldsToSearch) {

@@ -3,8 +3,10 @@ package com.ecommerce.app.controller;
 import com.ecommerce.app.entity.Product;
 import com.ecommerce.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,10 +32,11 @@ public class ProductController {
         return this.productService.getProduct(id);
     }
 
-    @PostMapping("/seller/addProduct")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        return this.productService.addProduct(product);
+    @PostMapping(path = "/seller/addProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Product> addProduct(@RequestPart("product") String product, @RequestPart("image") MultipartFile image) {
+        return this.productService.addProduct(product, image);
     }
+
     @PutMapping("/seller/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product product) {
         return this.productService.updateProduct(id, product);
