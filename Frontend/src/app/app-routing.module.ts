@@ -17,28 +17,29 @@ import { EditProductComponent } from './seller/edit-product/edit-product.compone
 import { EditProfileComponent } from './customer/edit-profile/edit-profile.component';
 import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
 import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
+import { roleGuard } from './shared/login/role.guard';
 
 const routes: Routes = [
   {
     path: '', // This is your default layout with the navbar
     component: NavComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       {
         path: 'products',
         component: ProductsComponent,
-        canActivate: [AuthGuard],
       },
       { path: 'products/:id', component: ProductComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'viewUsers', component: AdminComponent, canActivate:[roleGuard], data:{role:'admin'} },
       { path: 'user', component: UserComponent },
-      { path: 'savedAddresses', component: SavedAddressesComponent },
-      { path: 'editAddress/:id', component: EditAddressComponent },
+      { path: 'savedAddresses', component: SavedAddressesComponent, canActivate:[roleGuard], data:{role:'customer'} },
+      { path: 'editAddress/:id', component: EditAddressComponent , canActivate:[roleGuard], data:{role:'customer'}},
       { path: 'editProfile', component: EditProfileComponent },
-      { path: 'cart', component: CartComponent },
+      { path: 'cart', component: CartComponent , canActivate:[roleGuard], data:{role:'customer'}},
       {
         path: 'orders',
-        component: OrdersComponent,
+        component: OrdersComponent, canActivate:[roleGuard], data:{role:'customer'},
         children: [
           {
             path: ':id',
@@ -46,15 +47,15 @@ const routes: Routes = [
           },
         ],
       },
-      { path: 'listedProducts', component: SellerComponent },
-      { path: 'addProduct' , component:AddProductComponent},
-      { path: 'editProduct/:id' , component:EditProductComponent},
-      { path: 'viewUsers', component: AdminComponent },
+      { path: 'listedProducts', component: SellerComponent , canActivate:[roleGuard], data:{role:'seller'}},
+      { path: 'addProduct' , component:AddProductComponent, canActivate:[roleGuard], data:{role:'seller'} },
+      { path: 'editProduct/:id' , component:EditProductComponent, canActivate:[roleGuard], data:{role:'seller'}},
     ],
   },
   // 'login' and 'register' routes are outside the default layout
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path:'**', redirectTo:'products' }
 ];
 
 

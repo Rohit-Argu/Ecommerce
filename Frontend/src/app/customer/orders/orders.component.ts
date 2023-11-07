@@ -21,9 +21,7 @@ export class OrdersComponent implements OnInit{
   
 
   ngOnInit(): void {
-    if(this.userService.getRole()!=='customer'){
-      this.error.handle('Cannot access this!')
-    }
+    
 
     this.ordersService.fetchOrders();
     this.ordersService.orderChanged.subscribe(

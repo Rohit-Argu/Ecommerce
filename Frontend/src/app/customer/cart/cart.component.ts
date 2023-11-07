@@ -1,7 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CartProductModel } from 'src/app/shared/model/cart.product.model';
-import { ProductModel } from 'src/app/shared/model/product.model';
 import { CartService } from './cart.service';
 import { OrdersService } from '../orders/orders.service';
 import { OrdersModel } from 'src/app/shared/model/orders.model';
@@ -9,7 +7,6 @@ import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { ErrorHandlerService } from 'src/app/errorHandler.service';
 import { CartProduct1Model } from 'src/app/shared/model/CartProduct.model';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -30,10 +27,7 @@ export class CartComponent implements OnInit{
   
 
   ngOnInit(): void {
-    if(this.userService.getRole()!=='customer'){
-      
-      this.error.handle('Cannot access this!')
-    }
+    
     this.cartService.fetCart1();
     this.cartService.itemChanges.subscribe(
       (data)=>{

@@ -28,9 +28,7 @@ export class EditProductComponent implements OnInit{
   constructor(private http:HttpClient,private route:ActivatedRoute,private sellerService:SellerService,private userService:UserService,private error:ErrorHandlerService){}
 
   ngOnInit(): void {
-    if(this.userService.getRole()!=='seller'){
-      this.error.handle('Cannot access this!')
-    }
+    
     this.id=this.route.snapshot.params['id'];
     this.http.get<Product1Model>('http://localhost:8080/api/v1/product/viewProduct/'+this.id).subscribe(
       (data)=>{

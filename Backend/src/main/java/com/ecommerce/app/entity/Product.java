@@ -27,8 +27,7 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-//    @Lob
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "LONGTEXT")
     private String image;
 
     @Column(name = "description")

@@ -200,4 +200,11 @@ export class UserService {
         }
     )
   }
+  addAddress(a:any){
+    this.http.post('http://localhost:8080/api/v1/user/address/addAddress',a).subscribe(
+      (data)=>{
+        console.log(data);
+      }
+    )
+  }
 }

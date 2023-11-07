@@ -73,7 +73,7 @@ import { EditAddressComponent } from './customer/saved-addresses/edit-address/ed
     MatFormFieldModule,
     MatProgressBarModule
   ],
-  providers: [AuthGuard,{
+  providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi:true
