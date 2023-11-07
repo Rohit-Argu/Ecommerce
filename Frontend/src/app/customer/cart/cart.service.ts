@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { EventEmitter, Injectable, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CartProduct1Model } from "src/app/shared/model/CartProduct.model";
@@ -11,20 +11,38 @@ export class CartService implements OnInit{
     itemChanges=new Subject<any>();
     items: CartProductModel[]=[];
 
-    allItems!:CartProduct1Model;
+    quantity:number=0;
+    allItems:CartProduct1Model={
+      id:0,
+      cartDetails:[],
+      amount:0
+    };
   constructor(private http: HttpClient){}
 
     ngOnInit(): void {
       
     }
+    fetCart1(){
+      this.http.get<CartProduct1Model>('http://localhost:8080/api/v1/cart/viewCart').subscribe(
+        (data)=>{
+          this.allItems=data;
+          this.itemChanges.next(data);
+        }
+      )
+    }
     fetchCart(){
-      return this.http.get<CartProduct1Model>('http://localhost:8080/api/v1/cart/viewCart')
+      return this.allItems;
     }
       getItems(){
         console.log(this.allItems);
         return this.items.slice();
       }
-      addToCart(p:ProductModel,q:number){
+      addToCart(i:number,q:number){
+        this.http.post('http://localhost:8080/api/v1/cart/addToCart/'+i+'/'+q,{}).subscribe(
+          (data)=>{
+            console.log(data);
+            this.fetCart1();
+          })
         // console.log(p);
         // this.items.push({
         //     img: p.img,
@@ -40,18 +58,20 @@ export class CartService implements OnInit{
         this.itemChanges1.next(this.items.slice());
       }
       emptyCart(){
-        this.items=[];
-        this.itemChanges1.next(this.items.slice());
+        const headers=new HttpHeaders().set('Content-Type','text/plain; charset=utf-8');
+        this.http.delete('http://localhost:8080/api/v1/cart/emptyCart',{
+          headers,responseType:'text'
+        }).subscribe(
+          (data)=>{
+            console.log(data);
+            this.fetCart1();
+          });
       }
-      getTotalQuantity(){
-        let sum=0;
-        for(let item of this.items){
-          sum=sum+item.quantity;
-        }
-        return sum;
-      }
-      itemChanged(){
-        this.itemChanges.next('');
+      getQuantity(){
+        for(let cd of this.allItems.cartDetails)
+          this.quantity+=cd.quantity;
+          console.log(this.quantity);
+          return this.quantity;
       }
       deleteItem(i:number){
 
@@ -59,14 +79,14 @@ export class CartService implements OnInit{
       decreaseItemQuantity(i:number){
         this.http.post('http://localhost:8080/api/v1/cart/addToCart/'+i+'/-1',{}).subscribe(
           (data)=>{
-            this.itemChanges.next('');
+            this.fetCart1();
           }
         );
       }
       increaseItemQuantity(i:number){
         this.http.post('http://localhost:8080/api/v1/cart/addToCart/'+i+'/1',{}).subscribe(
           (data)=>{
-            this.itemChanges.next('');
+            this.fetCart1();
           }
         );
       }

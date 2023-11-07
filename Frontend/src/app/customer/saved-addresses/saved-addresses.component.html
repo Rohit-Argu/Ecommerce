@@ -1,0 +1,44 @@
+<section class="h-100" style="background-color: rgb(241, 233, 222);">
+    
+    
+    
+    <div class="container py-5 h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngFor="let item of addresses;let i=index">
+                    <div class="border border-secondary shadow p-4 mb-4 bg-white" style="border-radius: 2vw;cursor: pointer;" (click)="changeShow(i)">
+                    <!-- (click)="changeShow(i)" -->
+                    
+                        <div class="row mb-4 d-flex justify-content-between align-items-center pt-2">
+                
+                            <div class="d-flex col-xl-12" style="justify-content: space-evenly;">
+
+                                <div>
+                                    <h6 class="text-muted mb-0"><strong>House number : </strong> {{item.houseNo}}</h6>
+                                    <h6 class="text-black mb-0"><strong>Locality : </strong> {{item.locality}}</h6>
+                                </div>
+                                <div>
+                                    <h6 class="text-black mb-0"><strong>District : </strong> {{item.district}}</h6>
+                                    <h6 class="text-black mb-0"><strong>State : </strong> {{item.state}}</h6>
+                                </div>
+                                <div>
+                                    <h6 class="text-black mb-0 d-flex"><strong>Country : </strong> {{item.country}}</h6>
+                                    <h6 class="text-black mb-0 d-flex"><strong>Pincode : </strong> {{item.pincode}}</h6>
+                                </div>
+                                <button type="button" class="btn btn-dark" (click)="editItem(item.id)">Edit</button>
+                                <span class="pt-2"><i class="fa fa-times" (click)="deleteItem(item.id)"></i></span>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                
+                
+                
+                            </div>
+                
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

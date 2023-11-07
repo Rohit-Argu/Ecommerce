@@ -11,12 +11,12 @@
                 
                             <div class="d-flex col-xl-12" style="justify-content: space-evenly;">
 
-                                <h6 class="text-muted"><strong>Order number : </strong>{{i}}</h6>
-                                <h6 class="text-muted"><strong>Number Of Items: </strong>{{item.numberOfItems}}</h6>
-                                <h6 class="text-black mb-0"><strong>Total Price: </strong>{{item.totalPrice}}</h6>
-                                <h6 class="text-black mb-0 d-flex"><strong>Delivery Status: </strong>
+                                <h6 class="text-muted"><strong>Order number : </strong>{{i+1}}</h6>
+                                <h6 class="text-muted"><strong>Number Of Items: </strong>{{item.orderDetails.length}}</h6>
+                                <h6 class="text-black mb-0"><strong>Total Price: </strong>{{item.amount}}</h6>
+                                <h6 class="text-black mb-0 d-flex"><strong>Payment Status: </strong>
                                     <p id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm">
-                                        {{item.deliveryStatus}}</p>
+                                        {{item.payment.status}}</p>
                                 </h6>
                             </div>
                             <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
@@ -28,7 +28,7 @@
                             
                         </div>
                     </div>
-                    <app-order-details *ngIf="item.show"
+                    <app-order-details *ngIf="show[i]"
                     [index]="i"></app-order-details>
                 </div>
             </div>

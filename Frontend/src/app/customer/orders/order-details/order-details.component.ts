@@ -4,6 +4,8 @@ import { OrdersModel } from 'src/app/shared/model/orders.model';
 import { OrdersService } from '../orders.service';
 import { UserService } from '../../user.service';
 import { ErrorHandlerService } from 'src/app/errorHandler.service';
+import { OrderModel } from 'src/app/shared/model/Order.model';
+import { OrderDetails1Model } from 'src/app/shared/model/orderDetails1.model';
 
 @Component({
   selector: 'app-order-details',
@@ -14,8 +16,8 @@ export class OrderDetailsComponent implements OnInit{
   @Input()
   index!: number;
 
-  orderDetails: OrderDetailsModel[]=[];
-  orders:OrdersModel[]=[];
+  orderDetails: OrderDetails1Model[]=[];
+  orders:OrderModel[]=[];
 
   constructor(private ordersService: OrdersService,private userService:UserService,private error:ErrorHandlerService){}
 
@@ -24,13 +26,14 @@ export class OrderDetailsComponent implements OnInit{
       this.error.handle('Cannot access this!')
     }
     this.orders=this.ordersService.getOrders();
-    this.orderDetails=this.ordersService.getOrderDetails();
-    this.ordersService.orderDetailsChanged.subscribe(
-      (orderdetail: OrderDetailsModel[])=>{
-        this.orderDetails=orderdetail;
-        console.log(this.orderDetails);
-      }
-    )
+    this.orderDetails=this.ordersService.getOrderDetails(this.index);
+    console.log(this.orderDetails);
+    // this.ordersService.orderDetailsChanged.subscribe(
+    //   (orderdetail: OrderDetails1Model[])=>{
+    //     this.orderDetails=orderdetail;
+    //     console.log(this.orderDetails);
+    //   }
+    // )
   }
 
 
