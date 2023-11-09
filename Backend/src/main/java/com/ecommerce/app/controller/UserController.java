@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("/admin/getUsers")
     public ResponseEntity<UsersResp> getUsers(
-            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int size,
             @RequestParam(defaultValue = "id", required = false) String sortField,
             @RequestParam(defaultValue = "asc", required = false) String sortOrder,

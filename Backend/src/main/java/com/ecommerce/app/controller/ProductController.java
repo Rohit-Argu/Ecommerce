@@ -1,5 +1,6 @@
 package com.ecommerce.app.controller;
 
+import com.ecommerce.app.dao.ProductsResp;
 import com.ecommerce.app.entity.Product;
 import com.ecommerce.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,17 @@ public class ProductController {
     @GetMapping("/viewAllProducts")
     public ResponseEntity<List<Product>> viewAllProducts() {
         return this.productService.getAllProducts();
+    }
+
+    @GetMapping("/viewAllProductsFiltered")
+    public ResponseEntity<ProductsResp> viewAllProductsFiltered(
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int size,
+            @RequestParam(defaultValue = "id", required = false) String sortField,
+            @RequestParam(defaultValue = "asc", required = false) String sortOrder,
+            @RequestParam(defaultValue = "", required = false) String filterValue
+    ) {
+        return this.productService.getAllProductsFiltered(page, size, sortField, sortOrder, filterValue);
     }
 
     @GetMapping("/viewProduct/{id}")

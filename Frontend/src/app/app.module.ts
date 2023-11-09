@@ -33,6 +33,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
 import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { EditAddressComponent } from './customer/saved-addresses/edit-address/ed
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
