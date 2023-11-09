@@ -35,3 +35,29 @@ img{
 	cursor: pointer;
 	outline: inherit;
 }
+
+/* product-list.component.css */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px;
+  }
+  
+  .mat-card {
+    width: 300px;
+    border: 1px solid black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .mat-card-content {
+    text-align: center;
+  }
+  
+  .mat-card-image {
+    height: 30vh;
+    object-fit: cover;
+  }
+  
+  

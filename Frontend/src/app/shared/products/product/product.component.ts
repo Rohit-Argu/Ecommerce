@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   quantity:number=1
   product:ProductModel={
     id:0,
-    img:"",
+    image:"",
     name:"",
     price:0,
     stock:0,
@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
     this.productService.getProducts(this.id).subscribe((data)=>{
       this.product={
         id: data.id,
-          img: data.image,
+          image: data.image,
           name: data.name,
           price: data.price,
           stock: data.stock,

@@ -26,7 +26,7 @@ export class SellerComponent implements OnInit{
         for(let i =0;i<data.length;i++){
           this.products.push({
             id:data[i].id,
-            img:data[i].image,
+            image:data[i].image,
             name:data[i].name,
             price:data[i].price,
             stock:data[i].stock,

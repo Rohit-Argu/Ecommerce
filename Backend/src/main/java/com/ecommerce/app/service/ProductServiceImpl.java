@@ -1,11 +1,17 @@
 package com.ecommerce.app.service;
 
+import com.ecommerce.app.dao.ProductsResp;
+import com.ecommerce.app.dao.UsersResp;
 import com.ecommerce.app.entity.Product;
 import com.ecommerce.app.entity.User;
 import com.ecommerce.app.repository.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -54,6 +60,40 @@ public class ProductServiceImpl implements ProductService{
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> productList = new ArrayList<>(productRepository.findAll());
         return ResponseEntity.ok(productList);
+    }
+
+    @Override
+    public ResponseEntity<ProductsResp> getAllProductsFiltered(int page, int size, String sortField, String sortOrder, String filterValue) {
+
+        page = page - 1;
+
+        Sort.Direction sortDir;
+        if(sortOrder.equals("asc")){
+            sortDir = Sort.Direction.ASC;}
+        else {sortDir = Sort.Direction.DESC;}
+
+        Pageable p = PageRequest.of(page, size, Sort.by(sortDir, sortField));
+        Page<Product> pagePost;
+
+        if (filterValue.isEmpty()){
+            pagePost = productRepository.findAll(p);
+        } else {
+            pagePost = productRepository.findAll(filterValue, p);
+        }
+
+        List<Product> allPosts = pagePost.getContent();
+
+        ProductsResp productsResp = new ProductsResp();
+
+        productsResp.setContent(allPosts);
+        productsResp.setPageNumber(pagePost.getNumber());
+        productsResp.setPageSize(pagePost.getSize());
+        productsResp.setTotalElements(pagePost.getTotalElements());
+        productsResp.setTotalPages(pagePost.getTotalPages());
+        productsResp.setLastPage(pagePost.isLast());
+
+        return ResponseEntity.ok(productsResp);
+
     }
 
     @Override
