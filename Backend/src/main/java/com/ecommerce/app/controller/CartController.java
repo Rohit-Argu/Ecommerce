@@ -26,6 +26,9 @@ public class CartController {
         return this.cartService.viewCart();
     }
 
+    @DeleteMapping("/removeItem/{id}")
+    public ResponseEntity<String> deleteItem(@PathVariable int id){ return this.cartService.deleteItem(id);}
+
     @DeleteMapping("/emptyCart")
     public ResponseEntity<String> emptyCart() {
         return this.cartService.emptyCart();

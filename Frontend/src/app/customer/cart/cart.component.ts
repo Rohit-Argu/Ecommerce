@@ -73,8 +73,9 @@ export class CartComponent implements OnInit{
       deliveryStatus: "Shipping",
       show: false
     };
-    this.ordersService.addOrder(order,this.items);
-    this.router.navigate(['orders'])
+    this.router.navigate(['checkout']);
+    // this.ordersService.addOrder(order,this.items);
+    // this.router.navigate(['orders'])
   }
   emptyCart(){
     this.cartService.emptyCart();

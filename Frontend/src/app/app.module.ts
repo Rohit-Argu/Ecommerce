@@ -33,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
 import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
+import { AddressPaymentComponent } from './customer/address-payment/address-payment.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { EditAddressComponent } from './customer/saved-addresses/edit-address/ed
     EditProductComponent,
     EditProfileComponent,
     SavedAddressesComponent,
-    EditAddressComponent
+    EditAddressComponent,
+    AddressPaymentComponent
   ],
   imports: [
     BrowserModule,

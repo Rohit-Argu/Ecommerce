@@ -37,7 +37,8 @@ export class EditAddressComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     console.log(this.id);
-    if (this.id !== -1) {
+    
+    if (this.id != 0) {
       this.userService.fetchAddress(this.id);
       this.userService.addressChanged.subscribe((data) => {
         this.id = data.id;
@@ -59,7 +60,7 @@ export class EditAddressComponent implements OnInit {
     this.a1.state = this.addressForm.value.state || '';
     this.a1.country = this.addressForm.value.country || '';
     this.a1.pincode = this.addressForm.value.pincode || 0;
-    if(this.id!==-1){
+    if(this.id != 0){
       this.userService.editAddress(this.a1, this.id);
     }
     else{

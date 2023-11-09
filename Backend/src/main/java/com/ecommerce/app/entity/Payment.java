@@ -13,20 +13,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
-enum PaymentMethod {
-    COD,
-    UPI,
-    NetBanking,
-    CreditCard,
-    DebitCard
-}
-
-enum Status {
-    Pending,
-    Failed,
-    Completed
-}
-
 @Entity
 @Data
 @NoArgsConstructor
