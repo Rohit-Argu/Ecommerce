@@ -8,6 +8,7 @@ import { User2Model } from '../shared/model/user2.model';
 import { UsersResp } from '../admin/UsersResp';
 import { Router } from '@angular/router';
 import { AddressModel } from '../shared/model/address.model';
+import { Location } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -79,7 +80,7 @@ export class UserService {
     createdAt: '',
     phone: '',
   };
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private location:Location) {}
 
   usersChange = new Subject<UserModel[]>();
   users: UserModel[] = [
@@ -191,20 +192,31 @@ export class UserService {
       })
       .subscribe((data) => {
         console.log(data);
+        this.fetchAddresses();
       });
   }
   editAddress(a:any,id:number){
     this.http.put('http://localhost:8080/api/v1/user/customer/updateAddress/'+id,a).subscribe(
         (data)=>{
             console.log(data);
+            this.fetchAddresses();
+            this.location.back();
         }
-    )
+    );
   }
   addAddress(a:any){
     this.http.post('http://localhost:8080/api/v1/user/address/addAddress',a).subscribe(
       (data)=>{
         console.log(data);
+        this.fetchAddresses();
+        this.location.back();
       }
-    )
+    );
+  }
+  setRole(r:string){
+    this.user.role=r.toLowerCase();
+  }
+  getFirstName(){
+    return this.user.firstName;
   }
 }

@@ -35,6 +35,7 @@ import { SavedAddressesComponent } from './customer/saved-addresses/saved-addres
 import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
 import {MatCardModule} from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { AddressPaymentComponent } from './customer/address-payment/address-payment.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MatSelectModule } from '@angular/material/select';
     EditProductComponent,
     EditProfileComponent,
     SavedAddressesComponent,
-    EditAddressComponent
+    EditAddressComponent,
+    AddressPaymentComponent
   ],
   imports: [
     BrowserModule,
