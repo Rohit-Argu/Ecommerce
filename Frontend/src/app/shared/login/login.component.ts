@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
 import { UserService } from 'src/app/customer/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -34,8 +36,8 @@ export class LoginComponent implements OnInit{
       (resData)=>{
         
         localStorage.setItem('token',resData.token);
-        this.userService.getUser();
-        
+
+
         this.router.navigate(['products']);
       },
       (error)=>{

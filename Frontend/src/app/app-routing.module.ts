@@ -18,6 +18,7 @@ import { EditProfileComponent } from './customer/edit-profile/edit-profile.compo
 import { SavedAddressesComponent } from './customer/saved-addresses/saved-addresses.component';
 import { EditAddressComponent } from './customer/saved-addresses/edit-address/edit-address.component';
 import { roleGuard } from './shared/login/role.guard';
+import { AddressPaymentComponent } from './customer/address-payment/address-payment.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'editAddress/:id', component: EditAddressComponent , canActivate:[roleGuard], data:{role:'customer'}},
       { path: 'editProfile', component: EditProfileComponent },
       { path: 'cart', component: CartComponent , canActivate:[roleGuard], data:{role:'customer'}},
+      { path: 'checkout', component: AddressPaymentComponent , canActivate:[roleGuard], data:{role:'customer'}},
       {
         path: 'orders',
         component: OrdersComponent, canActivate:[roleGuard], data:{role:'customer'},

@@ -36,6 +36,15 @@ public class OrderServiceImpl implements OrderService{
         }
         payment.setOrder(order);
         payment.setAmount(cart.getAmount());
+        if(payment.getPaymentMethod()==PaymentMethod.COD){
+            payment.setStatus(Status.Pending);
+        }
+        else{
+            payment.setStatus(Status.Completed);
+        }
+        if(payment.getStatus()==Status.Completed){
+            payment.setPaidAt(LocalDateTime.now());
+        }
         order.setPayment(payment);
         this.cartService.emptyCart();
         orderRepository.save(order);

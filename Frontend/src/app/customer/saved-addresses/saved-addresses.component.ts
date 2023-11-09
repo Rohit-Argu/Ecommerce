@@ -60,5 +60,8 @@ export class SavedAddressesComponent implements OnInit{
   deleteItem(i:number){
     this.userService.deleteAddress(i);
   }
+  onAdd(){
+    this.router.navigate(['/editAddress',0])
+  }
 
 }

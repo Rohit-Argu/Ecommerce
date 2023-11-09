@@ -12,4 +12,6 @@ public interface CartService {
     ResponseEntity<Cart> viewCart();
 
     ResponseEntity<String> emptyCart();
+
+    ResponseEntity<String> deleteItem(int id);
 }

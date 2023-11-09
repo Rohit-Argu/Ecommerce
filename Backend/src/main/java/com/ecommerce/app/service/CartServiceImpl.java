@@ -78,4 +78,13 @@ public class CartServiceImpl implements CartService{
 
         return ResponseEntity.ok("Cart emptied!");
     }
+
+    @Override
+    public ResponseEntity<String> deleteItem(int id) {
+        Cart cart = this.viewCart().getBody();
+
+        cart.getCartDetails().remove(id);
+        cartRepository.save(cart);
+        return ResponseEntity.ok("Cart item removed!");
+    }
 }

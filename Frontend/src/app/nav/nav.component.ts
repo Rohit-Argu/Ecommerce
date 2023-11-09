@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../customer/cart/cart.service';
 import { UserService } from '../customer/user.service';
 import { AuthService } from '../shared/login/service/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-nav',
@@ -19,12 +20,18 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.userService.getUser();
     this.getRole();
     this.cartService.itemChanges.subscribe((data) => {
       this.quantity = 0;
       for (let cd of data.cartDetails) this.quantity += cd.quantity;
     });
+  }
+  getFirstName(){
+
+    this.firstName=this.userService.getFirstName();
+    return this.firstName;
   }
 
   getCartCount() {
@@ -34,16 +41,16 @@ export class NavComponent implements OnInit {
   getUser() {
     return 'customer';
   }
-  getFirstName() {
-    // return this.userService.getFirstName();
-    this.userService.userChanges.subscribe(
-      (data)=>{
-        this.firstName=data.firstName;
-        console.log(this.firstName);
-      }
-    )
-    return this.firstName;
-  }
+  // getFirstName() {
+  //   // return this.userService.getFirstName();
+  //   this.userService.userChanges.subscribe(
+  //     (data)=>{
+  //       this.firstName=data.firstName;
+  //       console.log(this.firstName);
+  //     }
+  //   )
+  //   return this.firstName;
+  // }
   onLogout() {
     this.authService.logout();
   }

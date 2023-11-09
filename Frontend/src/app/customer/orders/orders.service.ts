@@ -9,10 +9,11 @@ import { CartProduct1Model } from 'src/app/shared/model/CartProduct.model';
 import { HttpClient } from '@angular/common/http';
 import { OrderModel } from 'src/app/shared/model/Order.model';
 import { OrderDetails1Model } from 'src/app/shared/model/orderDetails1.model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class OrdersService {
-  constructor(private cartService: CartService,private http:HttpClient) {}
+  constructor(private cartService: CartService,private http:HttpClient,private router:Router) {}
 
   orderChanged=new Subject<OrderModel[]>();
   order:OrderModel[]=[
@@ -80,26 +81,15 @@ export class OrdersService {
     this.orderDetails=this.order[i].orderDetails;
     return this.orderDetails.slice();
   }
-  addOrder(order: OrdersModel, products: CartProduct1Model) {
-    this.orders.push(order);
-    this.ordersChanged.next(this.orders.slice());
-    let orderDetail: OrderDetailsModel = {
-      products: [],
-      totalPrice: order.totalPrice,
-      deliveryDate: new Date(),
-    };
-    for (let product of products.cartDetails) {
-      orderDetail.products.push({
-        img: '',
-        category: '',
-        name: product.product.name,
-        price: product.product.price,
-        quantity: product.quantity,
-      });
+  placeOrder(id:number,pm:string){
+    let payment={
+      paymentMethod:pm
     }
-    // this.orderDetails.push(orderDetail);
-    // this.orderDetailsChanged.next(this.orderDetails.slice());
-
-    this.cartService.emptyCart();
+    this.http.post('http://localhost:8080/api/v1/order/customer/placeOrder/'+id,payment).subscribe(
+      (data)=>{
+        console.log(data);
+        this.router.navigate(['orders']);
+      }
+    )
   }
 }

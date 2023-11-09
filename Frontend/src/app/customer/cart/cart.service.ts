@@ -33,10 +33,6 @@ export class CartService implements OnInit{
     fetchCart(){
       return this.allItems;
     }
-      getItems(){
-        console.log(this.allItems);
-        return this.items.slice();
-      }
       addToCart(i:number,q:number){
         this.http.post('http://localhost:8080/api/v1/cart/addToCart/'+i+'/'+q,{}).subscribe(
           (data)=>{
@@ -53,9 +49,15 @@ export class CartService implements OnInit{
         // });
         // this.itemChanges.next(this.items.slice());
       }
-      removeFromCart(i:number){
-        this.items.splice(i,1);
-        this.itemChanges1.next(this.items.slice());
+      removeFromCart(id:number){
+        const headers=new HttpHeaders().set('Content-Type','text/plain; charset=utf-8');
+        this.http.delete('http://localhost:8080/api/v1/cart/removeItem/'+id,{
+          headers,responseType:'text'
+        }).subscribe(
+          (data)=>{
+            console.log(data);
+            this.fetCart1();
+          });
       }
       emptyCart(){
         const headers=new HttpHeaders().set('Content-Type','text/plain; charset=utf-8');

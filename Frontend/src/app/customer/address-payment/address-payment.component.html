@@ -1,0 +1,118 @@
+<div class="h-100 row">
+    <section class="h-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-10 col-xl-8 h-100 w-100">
+                    <div class="card h-100" style="border-radius: 10px;">
+
+                        <div class="card-body p-4" style="height: 60%;background-color: rgb(227,215,196);">
+                            <div style="height: 75%;">
+                                <div *ngFor="let item of details.cartDetails">
+                                    <div class="card shadow-0 border mb-2">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img [src]="item.product.image" class="img-fluid" alt="Phone" style="height: 4vh;">
+                                                </div>
+                                                <div
+                                                    class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                                                    <h6 class="text-muted  mb-0 "><small>{{item.product.name}}</small></h6>
+                                                </div>
+    
+    
+                                                <div
+                                                    class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                                                    <p class="text-muted mb-0 small">Qty: {{item.quantity}}</p>
+                                                </div>
+                                                <div
+                                                    class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                    <p class="text-muted mb-0 small">{{item.product.price}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between pt-2 mb-2">
+                                <p class="fw-bold mb-0">Address : HouseNo: {{addresses[address].houseNo}}, Locality:
+                                    {{addresses[address].locality}} </p>
+                                <p class="text-black mb-0"><span class="fw-bold me-4">Payment Mode: </span>{{payment[paymentIndex]}}
+                                </p>
+                            </div>
+
+                            <div class="d-flex justify-content-between pt-2 mb-2">
+                                <p class="fw-bold mb-0">Order Details</p>
+                                <p class="text-black mb-0"><span class="fw-bold me-4">Total: </span>{{details.amount}}
+                                </p>
+                            </div>
+
+
+                        </div>
+                        <div class="row d-flex card-footer border-0 px-4 py-5 justify-content-between"
+                            style="background-color: rgba(26,26,26,1); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; margin: 0;">
+                            <div class="d-flex justify-content-between col-md-4">
+                                <button type="button" class="btn btn-dark" data-toggle="modal"
+                                    data-target=".bd-example-modal-lg">Address</button>
+
+                                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content container p-5">
+                                            <div class="row d-flex justify-space-between">
+                                                <h3 class=" col-md-8 text-black">Choose an Address:</h3>
+                                                <span class="col-md-4 d-flex justify-content-end"><i
+                                                        class="close fa fa-times" data-dismiss="modal"></i></span>
+                                            </div>
+                                            <div class="form-check pb-4" *ngFor="let item of addresses;let i = index">
+                                                <hr>
+                                                <input class="form-check-input" [checked]="i==0" type="radio" name="flexRadioDefault"
+                                                    id="flexRadioDefault{{i}}" [value]="i" [(ngModel)]="address">
+                                                <label class="form-check-label w-100" for="flexRadioDefault{{i}}">
+                                                    <p class="row d-flex">
+                                                        <span class="col-sm-2">House No: {{item.houseNo}}</span>
+                                                        <span class="col-sm-3">Locality: {{item.locality}}</span>
+                                                        <span class="col-sm-3">District: {{item.district}}</span>
+                                                        <span class="col-sm-2">State: {{item.state}}</span>
+                                                        <span class="col-sm-2">Country: {{item.country}}</span>
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-dark" data-toggle="modal"
+                                    data-target=".bd-example-modal-lg1">Payment</button>
+
+                                <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content container p-5">
+                                            <div class="row d-flex justify-space-between">
+                                                <h3 class=" col-md-8 text-black">Choose an Address:</h3>
+                                                <span class="col-md-4 d-flex justify-content-end"><i
+                                                        class="close fa fa-times" data-dismiss="modal"></i></span>
+                                            </div>
+                                            <div class="form-check pb-4" *ngFor="let item of payment;let i = index">
+                                                <hr>
+                                                <input class="form-check-input"[checked]="i" type="radio" name="address"
+                                                    id="flexRadioDefault{{i}}" [value]="i" [(ngModel)]="paymentIndex">
+                                                <label class="form-check-label w-100" for="flexRadioDefault{{i}}">
+                                                    <p class="row d-flex">
+                                                        <span class="col-sm-2">{{item}}</span>
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="col-md-6 d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                <button class="pt-3 btn btn-outline-dark text-black" (click)="placeOrder()" style="background-color: white;cursor: pointer;"><h5>Proceed to Pay : </h5></button><span class="h2 mb-0 ms-2">{{details.amount}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
