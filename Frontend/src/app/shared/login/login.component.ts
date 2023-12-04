@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
 import { UserService } from 'src/app/customer/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from '@angular/compiler';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,13 @@ import { Token } from '@angular/compiler';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit,OnDestroy{
+  user!: SocialUser;
+  loggedIn!: boolean;
+  authSubscription: any;
 
   
-  constructor(private router:Router, private authService:AuthService,private userService:UserService){}
+  constructor(private authService1:SocialAuthService,private router:Router, private authService:AuthService,private userService:UserService){}
 
   loginForm: FormGroup=new FormGroup({
     email: new FormControl(null,Validators.required),
@@ -27,6 +31,31 @@ export class LoginComponent implements OnInit{
       email: new FormControl(null,[Validators.required,Validators.email]),
         password: new FormControl(null,Validators.required)
     });
+    this.authSubscription = this.authService1.authState.subscribe((user) => {
+      if (user) {
+        localStorage.setItem('loggedIn', 'true');
+
+        if (localStorage.getItem('loggedIn') === 'true') {
+          this.authService.googleSignIn(user.idToken).subscribe(
+            (resData) => {
+              localStorage.setItem('loggedIn', 'false');
+              localStorage.setItem('token', resData.token);
+              this.router.navigate(['products']);
+            },
+            (error) => {
+              alert('Wrong credentials');
+              this.router.navigate(['login']);
+            }
+          );
+        }
+        
+        // Unsubscribe after the first emission to prevent multiple calls
+        if (this.authSubscription) {
+          this.authSubscription.unsubscribe();
+        }
+      }
+    });
+
   }
 
 
@@ -43,11 +72,15 @@ export class LoginComponent implements OnInit{
       (error)=>{
         alert("Wrong credentials");
         this.router.navigate(['login']);
-      })
-    
-    ;
-    
+      });
   }
+  ngOnDestroy(): void {
+    // Unsubscribe to avoid memory leaks
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
 
 }
 

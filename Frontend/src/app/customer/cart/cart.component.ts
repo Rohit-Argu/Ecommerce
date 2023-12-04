@@ -50,7 +50,7 @@ export class CartComponent implements OnInit{
   // this.cartService.itemChanged();
   }
   onQuantityIncrease(i:number){
-    if(this.items.cartDetails[i].quantity===5){
+    if(this.items.cartDetails[i].quantity===5||this.items.cartDetails[i].quantity>=this.items.cartDetails[i].product.stock){
       alert("Cannot Add Anymore item");
     }
     else{

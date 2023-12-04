@@ -18,6 +18,9 @@ export class SellerComponent implements OnInit{
   ngOnInit(): void {
    
     this.getProducts();
+    this.sellerService.change.subscribe((data)=>{
+      this.getProducts();
+    })
   }
   getProducts(){
     this.sellerService.getProducts().subscribe(
@@ -33,13 +36,13 @@ export class SellerComponent implements OnInit{
             description:data[i].description
           });
         }
+        console.log("Updating");
         
       }
     )
   }
   deleteItem(i:number){
     this.sellerService.deleteItem(this.products[i].id);
-    this.getProducts();
   }
   editItem(i:number){
     this.router.navigate(['editProduct/',this.products[i].id]);

@@ -33,6 +33,9 @@ export class AuthService{
         return this.http.post<AuthResponse>('http://localhost:8080/api/v1/auth/signup',bodyData)
         
     }
+    googleSignIn(idToken: any){
+        return this.http.post<AuthResponse>('http://localhost:8080/api/v1/auth/google/signin',idToken)
+    }
 }
 interface AuthResponse {
     token: string;

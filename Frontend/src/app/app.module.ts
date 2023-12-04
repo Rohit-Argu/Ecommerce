@@ -36,6 +36,7 @@ import { EditAddressComponent } from './customer/saved-addresses/edit-address/ed
 import {MatCardModule} from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { AddressPaymentComponent } from './customer/address-payment/address-payment.component';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 
 @NgModule({
@@ -77,12 +78,30 @@ import { AddressPaymentComponent } from './customer/address-payment/address-paym
     MatFormFieldModule,
     MatProgressBarModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi:true
+  },{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '968868325006-u17s49aqmuu6lagj9r06tjlm0g8mn0r7.apps.googleusercontent.com'
+          )
+        }
+      ],
+      onError: (err) => {
+        console.error(err);
+      }
+    } as SocialAuthServiceConfig,
   }],
   bootstrap: [AppComponent]
 })
