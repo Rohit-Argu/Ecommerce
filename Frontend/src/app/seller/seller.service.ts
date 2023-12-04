@@ -5,9 +5,11 @@ import { Product1Model } from '../shared/model/product1.model';
 import { AddProductModel } from '../shared/model/addProduct.model';
 import { User1Model } from '../shared/model/user1.model';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SellerService implements OnInit {
+  change=new Subject<boolean>();
   seller: User1Model = {
     accountNonExpired: false,
     accountNonLocked: false,
@@ -64,6 +66,7 @@ export class SellerService implements OnInit {
       )
       .subscribe((data) => {
         console.log(data);
+        this.change.next(true);
       });
   }
   addItem(p: AddProductModel) {

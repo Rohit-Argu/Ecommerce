@@ -47,7 +47,7 @@ public class Product {
     @JsonIgnore
     private List<OrderDetails> orderDetails;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CartDetails> cartDetails;
 

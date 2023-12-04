@@ -3,6 +3,7 @@ import { CartService } from '../customer/cart/cart.service';
 import { UserService } from '../customer/user.service';
 import { AuthService } from '../shared/login/service/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ export class NavComponent implements OnInit {
   role = '';
   firstName:string='';
   constructor(
+    private authService1: SocialAuthService,
     private cartService: CartService,
     private userService: UserService,
     private authService: AuthService
@@ -52,6 +54,8 @@ export class NavComponent implements OnInit {
   //   return this.firstName;
   // }
   onLogout() {
+    localStorage.setItem('loggedIn','true');
+    this.authService1.signOut();
     this.authService.logout();
   }
   getRole() {

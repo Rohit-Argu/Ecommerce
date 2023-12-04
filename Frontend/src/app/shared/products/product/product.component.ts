@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
     this.location.back();
   }
   incQuantity(){
-    if(this.quantity<5)
+    if(this.quantity<5&&this.quantity<this.product.stock)
     this.quantity++;
   }
   decQuantity(){
