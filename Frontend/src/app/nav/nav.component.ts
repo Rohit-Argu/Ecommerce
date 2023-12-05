@@ -54,7 +54,7 @@ export class NavComponent implements OnInit {
   //   return this.firstName;
   // }
   onLogout() {
-    localStorage.setItem('loggedIn','true');
+    localStorage.setItem('loggedOut','true');
     this.authService1.signOut();
     this.authService.logout();
   }
