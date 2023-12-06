@@ -94,7 +94,10 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig,
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider(
-            '968868325006-u17s49aqmuu6lagj9r06tjlm0g8mn0r7.apps.googleusercontent.com'
+            '968868325006-u17s49aqmuu6lagj9r06tjlm0g8mn0r7.apps.googleusercontent.com',
+            {
+              oneTapEnabled: false,
+            }
           )
         }
       ],

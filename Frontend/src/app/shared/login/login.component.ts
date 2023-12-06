@@ -15,7 +15,7 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 export class LoginComponent implements OnInit,OnDestroy{
   user!: SocialUser;
-  loggedIn!: boolean;
+  loggedIn: boolean=false;
   authSubscription: any;
 
   
@@ -31,30 +31,31 @@ export class LoginComponent implements OnInit,OnDestroy{
       email: new FormControl(null,[Validators.required,Validators.email]),
         password: new FormControl(null,Validators.required)
     });
-    this.authSubscription = this.authService1.authState.subscribe((user) => {
-      if (user) {
-        localStorage.setItem('loggedIn', 'true');
-
-        if (localStorage.getItem('loggedIn') === 'true') {
-          this.authService.googleSignIn(user.idToken).subscribe(
-            (resData) => {
-              localStorage.setItem('loggedIn', 'false');
-              localStorage.setItem('token', resData.token);
-              this.router.navigate(['products']);
-            },
-            (error) => {
-              alert('Wrong credentials');
-              this.router.navigate(['login']);
-            }
-          );
+      this.authSubscription = this.authService1.authState.subscribe((user) => {
+        if (user) {
+          localStorage.setItem('loggedOut','true');
+          if (localStorage.getItem('loggedOut') === 'true') {
+            this.authService.googleSignIn(user.idToken).subscribe(
+              (resData) => {
+                localStorage.setItem('loggedOut', 'false');
+                localStorage.setItem('token', resData.token);
+                this.router.navigate(['products']);
+              },
+              (error) => {
+                alert('Wrong credentials');
+                this.router.navigate(['login']);
+              }
+            );
+          }
+          
+          // Unsubscribe after the first emission to prevent multiple calls
+          if (this.authSubscription) {
+            this.authSubscription.unsubscribe();
+          }
         }
-        
-        // Unsubscribe after the first emission to prevent multiple calls
-        if (this.authSubscription) {
-          this.authSubscription.unsubscribe();
-        }
-      }
-    });
+      });
+    
+    
 
   }
 
